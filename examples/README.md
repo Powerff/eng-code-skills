@@ -43,6 +43,15 @@ Load skill from github:Powerff/eng-code-skills/skills/frontend-code-refactor
 Split this React component without changing UX behavior.
 ```
 
+## 5) Backend workflow skills
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standards
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-implement-verify-commit
+```
+
+Use standards while writing APIs; use implement-verify-commit for a full delivery loop with graphify, verification, commit/push, and cleanup.
+
 ## Per-skill samples
 
 Each skill ships bilingual samples under `skills/<name>/examples/`:

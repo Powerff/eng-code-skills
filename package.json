@@ -1,7 +1,7 @@
 {
   "name": "eng-code-skills",
   "version": "0.1.0",
-  "description": "Standardized, install-on-demand AI agent skills for safe code refactoring, style checks, tech-debt scanning, and code review — general, backend, and frontend.",
+  "description": "Agent skills for engineering: style/refactor/debt/review plus backend delivery workflows (standards, optimize, bug-fix, commit, implement/verify).",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -22,7 +22,10 @@
     "python",
     "javascript",
     "typescript",
-    "agentskills"
+    "agentskills",
+    "spring",
+    "bug-fix",
+    "workflow"
   ],
   "repository": {
     "type": "git",

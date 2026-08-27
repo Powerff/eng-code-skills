@@ -1,0 +1,78 @@
+{
+  "name": "backend-code-standards",
+  "displayName": "Backend Code Standards",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "交付平台后端（Java/Spring）全局编码规范：枚举与常量收拢、禁止 Map/Entity 对外、DTO/VO 分层、 Service 接口实现分离、JavaDoc/OpenAPI、单一职责与 Bean 拷贝约定。 Use when writing or reviewing backend code, adding APIs/DTO/VO/Entity/Service, or when user mentions 代码规范、编码规范、统一范式、DTO、VO、枚举、魔法值、@backend-code-standards。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "java",
+    "spring",
+    "dto",
+    "vo",
+    "standards"
+  ],
+  "focus": [
+    "enums",
+    "dto-vo",
+    "service-layer",
+    "javadoc",
+    "openapi"
+  ],
+  "kind": "safe",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill code-standards",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

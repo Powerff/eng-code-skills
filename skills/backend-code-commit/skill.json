@@ -1,0 +1,74 @@
+{
+  "name": "backend-code-commit",
+  "displayName": "Backend Code Commit",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "将当前工作区最新代码提交到 Git 仓库，并撰写详细的变更说明（按模块/文件逐项描述）。Use when user asks to commit code, push changes, write commit message, 提交代码、代码提交、提交到仓库、写提交说明、详细 commit、@backend-code-commit。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "git",
+    "commit",
+    "push"
+  ],
+  "focus": [
+    "git-status",
+    "detailed-message",
+    "push"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill code-commit",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

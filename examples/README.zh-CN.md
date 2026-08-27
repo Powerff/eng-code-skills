@@ -43,6 +43,15 @@ Load skill from github:Powerff/eng-code-skills/skills/frontend-code-refactor
 Split this React component without changing UX behavior.
 ```
 
+## 5) 后端工作流技能
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standards
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-implement-verify-commit
+```
+
+写接口时启用编码规范；完整交付闭环使用 implement-verify-commit（含 graphify、验证、提交推送与清理）。
+
 ## 各技能示例
 
 每个技能目录下提供双语示例 `skills/<name>/examples/`：

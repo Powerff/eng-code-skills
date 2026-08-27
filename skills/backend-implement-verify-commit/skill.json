@@ -1,0 +1,78 @@
+{
+  "name": "backend-implement-verify-commit",
+  "displayName": "Backend Implement Verify Commit",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "按「图谱定向 → 实现需求 → 验证功能 → 提交并推送 → 停止服务释放资源」的强制五阶段工作流执行开发任务。Use when user asks to implement features, fix bugs, add endpoints, or mentions 实现需求、验证功能、提交代码、推送远程、先测后提、开发闭环、写完再提交、@backend-implement-verify-commit。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "implement",
+    "verify",
+    "commit",
+    "push"
+  ],
+  "focus": [
+    "graphify",
+    "implement",
+    "verify",
+    "commit",
+    "push",
+    "cleanup"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill implement-verify-commit",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

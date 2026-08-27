@@ -14,6 +14,33 @@ const REQUIRED_FILES = ['skill.json', 'prompt.md', 'SKILL.md'];
 const REQUIRED_DIRS = ['examples'];
 
 const EXPECTED = [
+  // general
+  'code-style-check',
+  'code-refactor',
+  'tech-debt-scan',
+  'code-review',
+  // backend analysis
+  'backend-code-style-check',
+  'backend-code-refactor',
+  'backend-tech-debt-scan',
+  'backend-code-review',
+  // backend workflows (from Cursor tech skills)
+  'backend-code-standards',
+  'backend-code-optimize',
+  'backend-bug-fix',
+  'backend-code-commit',
+  'backend-implement-verify',
+  'backend-implement-verify-commit',
+  'backend-implement-verify-restart',
+  // frontend
+  'frontend-code-style-check',
+  'frontend-code-refactor',
+  'frontend-tech-debt-scan',
+  'frontend-code-review',
+];
+
+/** Skills that must preserve business behavior (analysis / safe optimize). */
+const LOGIC_SAFE = new Set([
   'code-style-check',
   'code-refactor',
   'tech-debt-scan',
@@ -22,21 +49,28 @@ const EXPECTED = [
   'backend-code-refactor',
   'backend-tech-debt-scan',
   'backend-code-review',
+  'backend-code-standards',
+  'backend-code-optimize',
   'frontend-code-style-check',
   'frontend-code-refactor',
   'frontend-tech-debt-scan',
   'frontend-code-review',
-];
+]);
 
-const MANDATORY_SNIPPETS = [
+const COMMON_SNIPPETS = ['风险警告', '人工校验'];
+const LOGIC_SAFE_SNIPPETS = [
   '严禁修改业务逻辑',
-  '风险警告',
-  '人工校验',
+  '不得改变业务逻辑',
+  '行为不变',
 ];
 
 function fail(msg) {
   console.error(`FAIL: ${msg}`);
   process.exitCode = 1;
+}
+
+function hasAny(text, snippets) {
+  return snippets.some((s) => text.includes(s));
 }
 
 function main() {
@@ -108,9 +142,22 @@ function main() {
     }
 
     const prompt = fs.readFileSync(path.join(dir, 'prompt.md'), 'utf8');
-    for (const snip of MANDATORY_SNIPPETS) {
+    for (const snip of COMMON_SNIPPETS) {
       if (!prompt.includes(snip)) fail(`${name}: prompt.md missing mandatory snippet: ${snip}`);
       if (!skillMd.includes(snip)) fail(`${name}: SKILL.md missing mandatory snippet: ${snip}`);
+    }
+
+    if (LOGIC_SAFE.has(name)) {
+      if (!hasAny(prompt, LOGIC_SAFE_SNIPPETS)) {
+        fail(
+          `${name}: prompt.md missing logic-safe constraint (${LOGIC_SAFE_SNIPPETS.join(' | ')})`,
+        );
+      }
+      if (!hasAny(skillMd, LOGIC_SAFE_SNIPPETS)) {
+        fail(
+          `${name}: SKILL.md missing logic-safe constraint (${LOGIC_SAFE_SNIPPETS.join(' | ')})`,
+        );
+      }
     }
 
     // Independence: prompts must not reference sibling skills by relative path

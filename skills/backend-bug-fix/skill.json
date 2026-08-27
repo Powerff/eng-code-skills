@@ -1,0 +1,75 @@
+{
+  "name": "backend-bug-fix",
+  "displayName": "Backend Bug Fix",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "接收问题描述后，先定位根因再修复并验证，禁止未定位就改代码。Use when user reports bugs, errors, unexpected behavior, or mentions 问题修复、修 bug、排查问题、定位问题、报错、不工作、异常、@backend-bug-fix。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "bugfix",
+    "root-cause",
+    "verify"
+  ],
+  "focus": [
+    "reproduce",
+    "root-cause",
+    "minimal-fix",
+    "verify"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill bug-fix",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

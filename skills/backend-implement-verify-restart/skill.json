@@ -1,0 +1,76 @@
+{
+  "name": "backend-implement-verify-restart",
+  "displayName": "Backend Implement Verify Restart",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "按「图谱定向 → 实现需求 → 验证功能 → 停止服务释放资源 → 重启服务」的强制五阶段工作流执行开发任务，验证通过后先停掉本会话验证进程，再按项目惯例重启服务并留给用户继续使用，不自动 commit / push。Use when user asks to implement features then restart services, or mentions 实现需求、验证功能、重启服务、写完再验再重启、开发后拉起服务、@backend-implement-verify-restart。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "implement",
+    "verify",
+    "restart"
+  ],
+  "focus": [
+    "graphify",
+    "implement",
+    "verify",
+    "cleanup",
+    "restart"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill implement-verify-restart",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "backend-code-optimize",
+  "displayName": "Backend Code Optimize",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "以资深工程师视角出具可执行的代码评审意见，再按评审意见做行为不变的优化：补业务/行内注释、按单一职责拆分方法、统一编码范式，并处理评审发现的结构、错误处理、重复与可读性问题。优化不得改变业务逻辑，完成后须验证功能流程不变。Use when user asks to optimize, refactor, code review then fix, clean up code, or mentions 代码优化、代码评审、评审意见、全局优化、重构、单一职责、加注释、统一编码范式、@backend-code-optimize。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "optimize",
+    "review",
+    "refactor"
+  ],
+  "focus": [
+    "review-driven",
+    "behavior-preserving",
+    "srp",
+    "comments"
+  ],
+  "kind": "safe",
+  "entrypoint": "SKILL.md",
+  "source": "Extracted and adapted from Cursor skill code-optimize",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Target files, modules, or task description"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional extra constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}
