@@ -1,0 +1,84 @@
+{
+  "name": "frontend-code-refactor",
+  "displayName": "前端安全重构",
+  "version": "0.1.0",
+  "category": "frontend",
+  "description": "前端安全重构：拆分组件、整理 Hooks/状态、去重样式与逻辑；禁止改变交互与渲染结果语义。Use when frontend refactor, 组件重构, 不改交互。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "refactor",
+    "safe"
+  ],
+  "focus": [
+    "split-components",
+    "hooks",
+    "state",
+    "dedup",
+    "no-ui-regression"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

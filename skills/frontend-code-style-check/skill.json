@@ -1,0 +1,88 @@
+{
+  "name": "frontend-code-style-check",
+  "displayName": "前端代码规范检查",
+  "version": "0.1.0",
+  "category": "frontend",
+  "description": "前端专项规范检查（JS/TS/React/Vue）：组件臃肿、状态滥用、副作用泄露、Hooks 规范、Props、渲染冗余、样式耦合。Use when frontend style check, React/Vue 规范, 组件坏味道。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "style",
+    "react",
+    "vue",
+    "typescript"
+  ],
+  "focus": [
+    "fat-components",
+    "state",
+    "effects",
+    "hooks",
+    "props",
+    "render",
+    "css-coupling"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

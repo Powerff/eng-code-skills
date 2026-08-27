@@ -1,0 +1,83 @@
+{
+  "name": "tech-debt-scan",
+  "displayName": "通用技术债务扫描",
+  "version": "0.1.0",
+  "category": "general",
+  "description": "扫描项目通用技术债务：过时模式、耦合、缺失测试信号、配置硬编码等，只报告不自动改业务。Use when user asks tech debt scan, 技术债务, 债务扫描。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "tech-debt",
+    "scan",
+    "general"
+  ],
+  "focus": [
+    "coupling",
+    "outdated-patterns",
+    "test-gaps",
+    "maintainability"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

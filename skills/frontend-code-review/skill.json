@@ -1,0 +1,84 @@
+{
+  "name": "frontend-code-review",
+  "displayName": "前端代码评审",
+  "version": "0.1.0",
+  "category": "frontend",
+  "description": "前端代码评审：状态与副作用、渲染性能、Hooks、无障碍与 UX 回归风险；逻辑问题只标记。Use when frontend code review, React/Vue review, 前端评审。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "review"
+  ],
+  "focus": [
+    "state",
+    "effects",
+    "render",
+    "hooks",
+    "a11y",
+    "ux-regression"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

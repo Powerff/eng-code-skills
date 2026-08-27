@@ -1,0 +1,84 @@
+{
+  "name": "backend-code-refactor",
+  "displayName": "后端安全重构",
+  "version": "0.1.0",
+  "category": "backend",
+  "description": "后端安全重构：分层清晰、消除重复、改善命名与结构；禁止改交易语义/事务语义/接口契约。Use when backend refactor, 后端重构, 不改接口契约。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "refactor",
+    "safe"
+  ],
+  "focus": [
+    "layering",
+    "dedup",
+    "naming",
+    "structure",
+    "no-behavior-change"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

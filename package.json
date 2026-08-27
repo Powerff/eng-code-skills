@@ -1,0 +1,35 @@
+{
+  "name": "eng-code-skills",
+  "version": "0.1.0",
+  "description": "Standardized, install-on-demand AI agent skills for safe code refactoring, style checks, tech-debt scanning, and code review — general, backend, and frontend.",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ai-skill",
+    "agent-skill",
+    "engineering",
+    "code-refactoring",
+    "code-quality",
+    "code-review",
+    "llm-agent",
+    "backend",
+    "frontend",
+    "java",
+    "go",
+    "python",
+    "javascript",
+    "typescript",
+    "agentskills"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Powerff/eng-code-skills.git"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-skills.mjs",
+    "list-skills": "node scripts/validate-skills.mjs --list"
+  }
+}

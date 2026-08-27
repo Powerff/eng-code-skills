@@ -1,0 +1,20 @@
+# OS / editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Dependencies / build
+node_modules/
+dist/
+coverage/
+
+# Local env
+.env
+.env.*
+
+# graphify local artifacts (optional regenerate)
+graphify-out/
+
+# Project docs (kept local; not published with skills package)
+docs/

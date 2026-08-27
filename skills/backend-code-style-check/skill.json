@@ -1,0 +1,88 @@
+{
+  "name": "backend-code-style-check",
+  "displayName": "后端代码规范检查",
+  "version": "0.1.0",
+  "category": "backend",
+  "description": "后端专项规范检查（Java/Go/Python）：事务边界、异常吞捕获、N+1、并发、资源泄露、密钥硬编码、参数校验。Use when backend style check, Java/Go/Python 规范, 后端坏味道。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "style",
+    "java",
+    "go",
+    "python"
+  ],
+  "focus": [
+    "transaction",
+    "exception",
+    "n+1",
+    "concurrency",
+    "resource-leak",
+    "secrets",
+    "validation"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：主要编程语言"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只改某一模块）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}
