@@ -2,11 +2,11 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-Agent skill pack for engineering workflows: style checks, safe refactors, tech-debt scans, code review, plus **backend delivery workflows** extracted from Cursor technical skills (standards, optimize, bug-fix, commit, implement/verify loops).
+Agent skill pack for engineering workflows: style checks, safe refactors, tech-debt scans, code review, backend delivery workflows, plus **project-level frontend/backend refactor** skills (call-chain analysis → plan review → implement → CR → test loop).
 
 Compatible with [agentskills.io](https://agentskills.io), Cursor, and Claude Code. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`).
 
-**Version:** 0.1.0 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 19
+**Version:** 0.1.0 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 21
 
 ---
 
@@ -20,8 +20,8 @@ Compatible with [agentskills.io](https://agentskills.io), Cursor, and Claude Cod
 | --- | --- |
 | [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [Backend analysis](#backend-analysis) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) |
-| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) |
-| [Frontend](#frontend) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) |
+| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) |
+| [Frontend](#frontend) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
 
@@ -39,11 +39,18 @@ Compatible with [agentskills.io](https://agentskills.io), Cursor, and Claude Cod
 2. Prefer minimal diffs and project-local conventions.
 3. Still emit **risk warnings** and **manual checks** at the end.
 
+**Project refactor skills** (`backend-project-refactor`, `frontend-project-refactor`):
+
+1. Refactor ≠ 1:1 rewrite — analyze call/interaction chains before coding.
+2. Five phases with human plan review; harness cost caps (read/fix/test loops).
+3. Record decisions in `clarifications.md`; every phase emits risks + manual checks.
+
 Domain focus:
 
 - Backend analysis: transactions, concurrency, resources, data safety
 - Frontend: state stability, effects, render performance
 - Backend workflows: Java/Spring standards, evidence-based fixes, graphify-oriented delivery loops
+- Project refactor: ownership maps, GAP tables, phased migration + test loops
 
 ---
 
@@ -82,10 +89,11 @@ Packaged from Cursor technical skills used in day-to-day backend delivery. Cross
 | [`backend-implement-verify`](./skills/backend-implement-verify/) | `implement-verify` | graphify → implement → verify → stop services (no commit) |
 | [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) | `implement-verify-commit` | Full loop including commit/push, then stop services |
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | Verify → stop session services → restart for the user (no commit) |
+| [`backend-project-refactor`](./skills/backend-project-refactor/) | service-refactor methodology | Call-chain analysis → plan review → layered code → CR → test loop |
 
 ### Frontend
 
-Focus: fat components, state misuse, effect leaks, Hooks, props, redundant renders, style coupling.
+Focus: fat components, state misuse, effect leaks, Hooks, props, redundant renders, style coupling; plus project-level migration.
 
 | Skill | Description |
 | --- | --- |
@@ -93,6 +101,7 @@ Focus: fat components, state misuse, effect leaks, Hooks, props, redundant rende
 | [`frontend-code-refactor`](./skills/frontend-code-refactor/) | Frontend structure-preserving refactoring |
 | [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) | Frontend technical debt inventory |
 | [`frontend-code-review`](./skills/frontend-code-review/) | Frontend-oriented code review |
+| [`frontend-project-refactor`](./skills/frontend-project-refactor/) | Interaction/data-chain analysis → plan review → migrate → CR → test loop |
 
 ---
 
@@ -161,7 +170,7 @@ eng-code-skills/
 ├── LICENSE
 ├── package.json
 ├── scripts/validate-skills.mjs
-├── skills/                 # 19 skills
+├── skills/                 # 21 skills
 ├── examples/               # Composition examples (EN + zh-CN)
 └── .github/workflows/      # CI validation
 ```

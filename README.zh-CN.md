@@ -2,11 +2,11 @@
 
 [English](./README.md) · [中文](./README.zh-CN.md)
 
-工程向 Agent Skills 套件：覆盖规范检查、安全重构、技术债务扫描、代码评审，以及从 Cursor 技术技能封装的 **后端交付工作流**（编码规范、评审优化、问题修复、提交、实现/验证闭环）。
+工程向 Agent Skills 套件：覆盖规范检查、安全重构、技术债务扫描、代码评审、后端交付工作流，以及**前后端项目级重构**技能（链路分析 → 方案审查 → 编码 → CR → 测试闭环）。
 
 兼容 [agentskills.io](https://agentskills.io)、Cursor、Claude Code。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。
 
-**版本：** 0.1.0 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 19
+**版本：** 0.1.0 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 21
 
 ---
 
@@ -20,8 +20,8 @@
 | --- | --- |
 | [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [后端分析](#后端分析) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) |
-| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) |
-| [前端](#前端) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) |
+| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) |
+| [前端](#前端) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
 
@@ -39,11 +39,18 @@
 2. 最小改动，对齐仓库既有约定。
 3. 收尾仍须给出 **风险警告** 与 **人工校验**。
 
+**项目重构类**（`backend-project-refactor`、`frontend-project-refactor`）：
+
+1. 重构 ≠ 一比一搬运 — 先做调用链 / 交互链路分析再编码。
+2. 五阶段 + 人工方案审查；Harness 成本上限（精读/修复/测试轮次）。
+3. 决策写入 `clarifications.md`；每阶段输出风险与人工校验点。
+
 领域侧重点：
 
 - 后端分析：事务、并发、资源、数据安全
 - 前端：状态稳定、副作用、渲染性能
 - 后端工作流：Java/Spring 规范、证据驱动修复、graphify 导向交付闭环
+- 项目重构：归属映射、GAP 表、分阶段迁移与测试闭环
 
 ---
 
@@ -82,10 +89,11 @@
 | [`backend-implement-verify`](./skills/backend-implement-verify/) | `implement-verify` | graphify → 实现 → 验证 → 停服（不提交） |
 | [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) | `implement-verify-commit` | 含提交推送的完整闭环，再停服 |
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | 验证 → 停本会话服务 → 重启给用户（不提交） |
+| [`backend-project-refactor`](./skills/backend-project-refactor/) | 服务重构方法论 | 链路分析 → 方案审查 → 分层编码 → CR → 测试闭环 |
 
 ### 前端
 
-关注：组件臃肿、状态滥用、副作用泄露、Hooks、Props、冗余渲染、样式耦合。
+关注：组件臃肿、状态滥用、副作用泄露、Hooks、Props、冗余渲染、样式耦合；以及项目级迁移。
 
 | 技能 | 说明 |
 | --- | --- |
@@ -93,6 +101,7 @@
 | [`frontend-code-refactor`](./skills/frontend-code-refactor/) | 前端行为保持型重构 |
 | [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) | 前端技术债务盘点 |
 | [`frontend-code-review`](./skills/frontend-code-review/) | 前端导向代码评审 |
+| [`frontend-project-refactor`](./skills/frontend-project-refactor/) | 交互/数据链路分析 → 方案审查 → 迁移 → CR → 测试闭环 |
 
 ---
 
@@ -161,7 +170,7 @@ eng-code-skills/
 ├── LICENSE
 ├── package.json
 ├── scripts/validate-skills.mjs
-├── skills/                 # 19 个技能
+├── skills/                 # 21 个技能
 ├── examples/               # 组合示例（中英）
 └── .github/workflows/      # CI 校验
 ```

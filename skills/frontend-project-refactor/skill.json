@@ -1,0 +1,84 @@
+{
+  "name": "frontend-project-refactor",
+  "displayName": "Frontend Project Refactor",
+  "version": "0.1.0",
+  "category": "frontend",
+  "description": "Frontend project refactor via 5 phases: interaction/data-chain analysis, human plan review, architecture-aligned coding, CR completeness, and build/test loop. Adapted from service-refactor methodology. Use when migrating UI architecture, splitting god pages, 前端项目重构, 交互链路, @frontend-project-refactor.",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "refactor",
+    "migration",
+    "architecture"
+  ],
+  "focus": [
+    "interaction-chain",
+    "ownership-map",
+    "gap-analysis",
+    "phased-delivery",
+    "harness"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Adapted from https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/",
+    "references/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Legacy entrypoint / feature / service to refactor"
+      },
+      "targetArchitecture": {
+        "type": "string",
+        "description": "Optional target architecture notes"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "planPath": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

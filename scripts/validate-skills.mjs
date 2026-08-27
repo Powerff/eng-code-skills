@@ -32,11 +32,13 @@ const EXPECTED = [
   'backend-implement-verify',
   'backend-implement-verify-commit',
   'backend-implement-verify-restart',
+  'backend-project-refactor',
   // frontend
   'frontend-code-style-check',
   'frontend-code-refactor',
   'frontend-tech-debt-scan',
   'frontend-code-review',
+  'frontend-project-refactor',
 ];
 
 /** Skills that must preserve business behavior (analysis / safe optimize). */

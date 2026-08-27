@@ -52,6 +52,15 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-implement-ver
 
 写接口时启用编码规范；完整交付闭环使用 implement-verify-commit（含 graphify、验证、提交推送与清理）。
 
+## 6) 项目级重构（后端 / 前端）
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-project-refactor
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-project-refactor
+```
+
+方法论：链路/交互分析 → 人工方案审查 → 编码 → CR → 测试闭环（参考 [腾讯云开发者文章](https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg)）。
+
 ## 各技能示例
 
 每个技能目录下提供双语示例 `skills/<name>/examples/`：

@@ -1,0 +1,85 @@
+{
+  "name": "backend-project-refactor",
+  "displayName": "Backend Project Refactor",
+  "version": "0.1.0",
+  "category": "backend-workflow",
+  "description": "Backend service/project refactor via 5 phases: call-chain analysis, human plan review, layered implementation, CR completeness, and automated test loop. Progressive disclosure + harness cost controls. Use when refactoring services, migrating architectures, DDD remap, protocol GAP, 服务重构, 链路分析, @backend-project-refactor.",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "refactor",
+    "call-chain",
+    "ddd",
+    "migration"
+  ],
+  "focus": [
+    "call-chain",
+    "ownership-map",
+    "gap-analysis",
+    "phased-delivery",
+    "harness"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "source": "Adapted from https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/",
+    "references/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "Legacy entrypoint / feature / service to refactor"
+      },
+      "targetArchitecture": {
+        "type": "string",
+        "description": "Optional target architecture notes"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Optional constraints"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "planPath": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

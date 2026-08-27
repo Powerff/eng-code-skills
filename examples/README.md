@@ -52,6 +52,15 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-implement-ver
 
 Use standards while writing APIs; use implement-verify-commit for a full delivery loop with graphify, verification, commit/push, and cleanup.
 
+## 6) Project-level refactor (backend / frontend)
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-project-refactor
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-project-refactor
+```
+
+Methodology: call/interaction-chain analysis → human plan review → implement → CR → test loop (adapted from [Tencent Cloud Developer article](https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg)).
+
 ## Per-skill samples
 
 Each skill ships bilingual samples under `skills/<name>/examples/`:

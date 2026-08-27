@@ -1,0 +1,149 @@
+---
+name: frontend-project-refactor
+description: Frontend project refactor via 5 phases: interaction/data-chain analysis, human plan review, architecture-aligned coding, CR completeness, and build/test loop. Adapted from service-refactor methodology. Use when migrating UI architecture, splitting god pages, 前端项目重构, 交互链路, @frontend-project-refactor.
+license: MIT
+metadata:
+  version: "0.1.0"
+  category: frontend
+  author: eng-code-skills
+  source: weixin-refactor-methodology
+---
+
+# 前端项目重构（Frontend Project Refactor）
+
+方法论参考：[一个Skill搞定服务重构：从链路分析到测试自动化](https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg)（腾讯云开发者）。本技能将其泛化为可落地的前后端项目重构工作流，不绑定原文中的 C++ / tRPC-Go 技术栈。
+
+将「服务重构」方法论映射到前端：难点同样不在「换框架重写 UI」，而在把散落在路由、容器、状态、请求与历史兼容逻辑里的**交互与数据规则**梳理清楚，再映射到目标前端架构。
+
+## 核心判断
+
+**重构 ≠ 一比一组件搬运。**  
+真正的成本是：梳理隐式交互状态机、请求时序、缓存口径、权限守卫与历史兼容分支，再在目标架构中重新表达。
+
+前端常见散落点：
+
+- **交互状态机**：加载/空/错/重试、向导步骤、弹窗串联
+- **隐式校验**：表单规则、权限、feature flag、与后端契约的双端校验
+- **数据依赖**：瀑布请求、缓存键、派生状态、乐观更新回滚
+- **历史包袱**：兼容旧路由/旧字段/A-B 实验残留、无文档的特殊分支
+
+## 老前端四层模型（分析时必须按此展开）
+
+1. **入口层**：路由、布局、鉴权守卫、埋点初始化、全局 provider
+2. **编排层**：页面容器、组合多个 feature/API、协调副作用与导航
+3. **核心业务层**：领域状态（store/hooks）、规则计算、本地状态机分支
+4. **查询/数据层**：API client、selector、缓存、适配器（字段口径来源）
+
+分析时深入 hooks/effects/store reducer 内部，记录：
+
+- 每个关键状态字段的来源（props / API / 本地推导 / URL）
+- 每个分支的触发条件（用户动作、接口码、权限）
+
+## 渐进式披露（三层知识）
+
+| 层 | 内容 | 何时加载 |
+| --- | --- | --- |
+| L0 | 本 SKILL 元数据 | 始终 |
+| L1 | 本五阶段流程 | 激活时 |
+| L2 | `references/` | 对应阶段再读 |
+
+建议产物目录：`docs/refactor/<feature>/`
+
+- `project-config.md`
+- `plan.md`
+- `clarifications.md`
+- `gap-table.md`（组件/API/设计系统缺口）
+- `ownership-map.md`（旧步骤 → pages/features/entities/shared 等）
+
+## 五阶段流程（不可跳步）
+
+```
+- [ ] Phase 1 交互链路分析 & 生成方案
+- [ ] Phase 2 审查方案（人主导）
+- [ ] Phase 3 实施编码
+- [ ] Phase 4 代码 CR / 完整性评估
+- [ ] Phase 5 自动化 / 手测闭环
+```
+
+### Phase 1：交互链路分析 & 生成方案
+
+1. 读/补 `project-config.md`（旧应用入口、目标架构、设计系统/组件库参考）。
+2. 按四层追踪：路由 → 容器 → 状态/规则 → API/缓存，到最终请求与导航副作用。
+3. **GAP 分析**：所需 API/组件/路由能力 vs 目标仓已有能力。
+4. 生成方案：用户路径、状态机、数据依赖、归属映射、路由/契约变更、迁移优先级、测试与风险。
+5. 完整性自检：关键用户路径与状态分支是否列全、旧步骤是否有归属。
+
+### Phase 2：审查方案
+
+人确认：
+
+- 归属（page vs feature vs entity vs shared）是否合理
+- 路由/契约变更是否可接受
+- 哪些兼容分支必须保留
+- 灰度 / feature flag 策略
+
+AI 每轮最多 5 个选择题；记入 `clarifications.md`。**未确认禁止大面积改代码。**
+
+### Phase 3：实施编码
+
+- 按 feature/模块小步落地，遵循目标架构依赖方向（例如 UI → feature → entity → shared，禁止反向）
+- 状态单一来源；派生数据勿重复存储
+- effect 必须可清理；列表 key 稳定
+- **验证循环**：每完成一单元 → typecheck / lint / 单测或 story → 通过再继续；同错 3 次交人
+- **禁止**悄悄改交互语义、默认文案业务含义、埋点关键字段（除非方案已批准）
+
+### Phase 4：代码 CR
+
+三维：
+
+1. **设计**：分层、依赖方向、状态归属
+2. **实现**：effect 清理、错误/加载态、a11y 基础、请求取消
+3. **规范**：组件命名、hooks 规则、样式耦合、项目范式
+
+完整性：方案路径是否落全、状态机分支是否覆盖、GAP 项是否关闭。
+
+### Phase 5：测试闭环
+
+1. 构建（`npm run build` / 项目等价命令）
+2. 单测 / 组件测 / e2e（若有）；关键路径手测清单
+3. 优先用接近真实的 fixture / MSW，而不是空壳 mock 骗过编译
+4. 修复循环最多 5 轮；超限交人并附复现步骤与控制台/网络证据
+
+## 何时使用
+
+- 前端换架构（如 pages 巨石 → 特征分层）、跨框架迁移前的链路梳理与落地
+- 用户提到：前端项目重构、页面拆分迁移、交互链路分析、@frontend-project-refactor
+
+
+## Harness 保障机制（全程强制）
+
+参考 Harness Engineering：模型能力是商品化输入，**编排 / 验证 / 可观测 / 成本 / 可追溯**决定可靠性。
+
+1. **知识加载精准**：渐进式披露；当前阶段只读本阶段所需 references，禁止一次性塞满上下文。
+2. **流程不中断**：五阶段线性推进；每阶段「人发起 → AI 执行 → 人审查 → 再推进」；允许回退到上一阶段。
+3. **结果有校验**：分析要有完整性检查；编码要有单元级验证循环；CR 要有清单；测试要有真实运行证据。
+4. **成本不失控**：
+   - 同一文件单阶段最多精读 **2** 次
+   - 参考项目 / 参考模块最多查 **3** 个
+   - 同一编译/类型错误连续修 **3** 次仍不过 → 停下交人
+   - 测试自动修复循环最多 **5** 轮 → 超限汇总交人
+   - 每轮澄清问题最多 **5** 个
+5. **过程可追溯**：决策写入 `clarifications.md`；方案、归属映射、GAP 表、测试记录落盘可交接。
+
+## 人机分工
+
+| 人决定 | AI 执行 |
+| --- | --- |
+| 架构边界、目标分层、协议/契约取舍、灰度策略、废弃分支是否保留 | 老链路分析、方案草稿、代码生成、编译/构建、测试闭环与排障汇总 |
+
+## 统一输出要求
+
+每阶段结束必须包含：
+
+### 风险警告（必填）
+未覆盖分支、不确定字段来源、契约缺口、灰度风险等。
+
+### 人工校验点（必填）
+本阶段需要人确认的选择题 / 检查清单。
+
+
