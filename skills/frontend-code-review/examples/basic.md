@@ -1,24 +1,26 @@
-# 前端代码评审 示例
+# frontend-code-review example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 useEffect(() => { fetchUser(id).then(setUser); }, []);
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（评审意见示例）
-[必须关注] 依赖数组缺少 id，id 变化不会重新请求 — 标记正确性风险
-[建议] 处理卸载后 setState、以及 loading/error 态
+(sample review findings)
+[Must address] Dependency array missing id; id changes will not refetch — correctness risk
+[Suggestion] Guard setState after unmount; cover loading/error states
 ```
 
-## 说明
-effect 依赖问题以风险标记；是否改行为需人工确认。
+## Notes
+Missing effect dependencies are flagged as risks; behavior changes require human confirmation.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

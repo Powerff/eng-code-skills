@@ -1,9 +1,11 @@
-# 后端代码规范检查 示例
+# backend-code-style-check example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 func GetOrders(db *sql.DB, userIDs []int64) ([]Order, error) {
@@ -16,17 +18,17 @@ func GetOrders(db *sql.DB, userIDs []int64) ([]Order, error) {
 }
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（检查报告示例）
-[高] N+1 查询：按 userIDs 循环查 orders
-[高] 资源泄露：rows 未 Close；错误被忽略
-[中] 缺少入参空切片/上限校验
+(sample checklist report)
+[High] N+1 queries: looping userIDs to query orders
+[High] Resource leak: rows not Closed; errors ignored
+[Medium] Missing empty-slice / upper-bound input validation
 ```
 
-## 说明
-后端风格检查强调数据访问与资源安全。
+## Notes
+Backend style checks emphasize data access and resource safety.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

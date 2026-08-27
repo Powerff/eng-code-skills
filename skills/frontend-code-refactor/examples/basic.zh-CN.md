@@ -1,11 +1,11 @@
-# frontend-code-refactor example
+# 前端安全重构 示例
 
 [English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## Scenario
-Shows the expected output shape for a typical input.
+## 场景
+演示本技能在典型输入上的期望产出形态。
 
-## Input (Before)
+## 输入（Before）
 
 ```text
 function Profile({ user }) {
@@ -14,7 +14,7 @@ function Profile({ user }) {
 }
 ```
 
-## Expected output highlights
+## 期望产出要点
 
 ```text
 function Profile({ user }) {
@@ -36,8 +36,8 @@ function EmailText({ email }) {
 }
 ```
 
-## Notes
-Splits presentation only; initial state and data flow stay unchanged.
+## 说明
+仅拆分展示；状态初始值与数据流不变。
 
-## Reminder
-All findings are advisory. Require human review and tests before shipping.
+## 提醒
+所有结论仅供参考，上线前必须人工评审与测试。

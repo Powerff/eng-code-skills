@@ -81,6 +81,11 @@ function main() {
 
     const examples = fs.readdirSync(path.join(dir, 'examples'));
     if (examples.length === 0) fail(`${name}: examples/ is empty`);
+    for (const requiredExample of ['basic.md', 'basic.zh-CN.md']) {
+      if (!examples.includes(requiredExample)) {
+        fail(`${name}: missing examples/${requiredExample}`);
+      }
+    }
 
     let meta;
     try {

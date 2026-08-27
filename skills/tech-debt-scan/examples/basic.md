@@ -1,9 +1,11 @@
-# 通用技术债务扫描 示例
+# tech-debt-scan example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 // TODO: remove after migration (2021)
@@ -11,17 +13,17 @@ const API = 'http://127.0.0.1:3000';
 function getUser(id){ return fetch(API+'/u/'+id).then(r=>r.json()) }
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（无代码变更 — 扫描报告示例）
-P1 硬编码基址：API 写死 localhost，阻碍多环境部署
-P2 过期 TODO：2021 migration 标记仍在
-P2 错误处理缺失：fetch 无非 2xx 处理
+(no code changes — sample scan report)
+P1 Hardcoded base URL: API points at localhost, blocking multi-environment deploy
+P2 Stale TODO: 2021 migration marker still present
+P2 Missing error handling: fetch has no non-2xx handling
 ```
 
-## 说明
-债务扫描以报告为主，不自动改业务代码。
+## Notes
+Debt scans primarily produce reports; they do not automatically rewrite business code.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

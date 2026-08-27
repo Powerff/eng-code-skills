@@ -1,15 +1,17 @@
-# 通用代码规范检查 示例
+# code-style-check example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 function calc(a,b,c){var x=a+b;if(c){if(x>10){return x*2}else{return x}}else{return a}}
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
 function calculateSubtotal(unitPrice, quantity, applyDiscount) {
@@ -21,8 +23,8 @@ function calculateSubtotal(unitPrice, quantity, applyDiscount) {
 }
 ```
 
-## 说明
-仅改善命名与结构；计算公式与分支语义保持不变（示例中故意保留原语义以演示「不改业务」）。
+## Notes
+Improves naming and structure only; calculation and branch semantics stay unchanged (original semantics are intentionally preserved to demonstrate “no business-logic change”).
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

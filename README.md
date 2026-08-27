@@ -139,7 +139,7 @@ eng-code-skills/
 └── .github/workflows/
 ```
 
-Additional usage notes: [`examples/`](./examples/). Per-skill samples live under each skill’s `examples/` directory.
+Additional usage notes: [`examples/README.md`](./examples/README.md) ([中文](./examples/README.zh-CN.md)). Per-skill samples are bilingual under each skill’s `examples/` (`basic.md` / `basic.zh-CN.md`).
 
 ---
 

@@ -1,11 +1,11 @@
-# backend-code-refactor example
+# 后端安全重构 示例
 
 [English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## Scenario
-Shows the expected output shape for a typical input.
+## 场景
+演示本技能在典型输入上的期望产出形态。
 
-## Input (Before)
+## 输入（Before）
 
 ```text
 public Order place(OrderReq req) {
@@ -19,7 +19,7 @@ public Order place(OrderReq req) {
 }
 ```
 
-## Expected output highlights
+## 期望产出要点
 
 ```text
 public Order place(OrderReq req) {
@@ -38,8 +38,8 @@ private Order buildOrder(Long userId, BigDecimal total) {
 }
 ```
 
-## Notes
-Extracts construction logic only; validation and persistence order stay the same.
+## 说明
+仅提取构建逻辑；校验与持久化顺序不变。
 
-## Reminder
-All findings are advisory. Require human review and tests before shipping.
+## 提醒
+所有结论仅供参考，上线前必须人工评审与测试。

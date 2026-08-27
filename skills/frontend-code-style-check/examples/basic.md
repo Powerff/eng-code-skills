@@ -1,9 +1,11 @@
-# 前端代码规范检查 示例
+# frontend-code-style-check example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 useEffect(() => {
@@ -11,16 +13,16 @@ useEffect(() => {
 }, []);
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（检查报告示例）
-[高] setInterval 未在 cleanup 中 clearInterval，存在副作用泄露
-[中] 建议将 tick 逻辑抽离或说明为何必须驱动重渲染
+(sample checklist report)
+[High] setInterval is not cleared in cleanup — effect leak
+[Medium] Consider extracting tick logic or documenting why re-renders are required
 ```
 
-## 说明
-前端检查强调 effects 生命周期。
+## Notes
+Frontend checks emphasize effect lifecycles.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

@@ -1,9 +1,11 @@
-# 通用代码评审 示例
+# code-review example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 export function divide(a, b) {
@@ -11,16 +13,16 @@ export function divide(a, b) {
 }
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（评审意见示例，默认不改代码）
-[必须关注] b===0 时产生 Infinity/异常，调用方契约未定义 — 标记风险，不擅自改返回值
-[建议] 补充参数类型与单元测试
+(sample review findings; default is no code changes)
+[Must address] b===0 yields Infinity/errors; caller contract undefined — flag as risk; do not change return behavior unilaterally
+[Suggestion] Add parameter types and unit tests
 ```
 
-## 说明
-评审以意见为主；逻辑缺陷只标记。
+## Notes
+Reviews emphasize findings; logic defects are flagged, not silently fixed.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.

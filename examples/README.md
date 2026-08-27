@@ -1,42 +1,51 @@
-# 根级示例（Examples）
+# Examples
 
-本目录演示如何按需组合使用 `eng-code-skills`，**不替代**各技能目录内的 `examples/`。
+[English](./README.md) · [中文](./README.zh-CN.md)
 
-## 1) 只装一个后端重构技能
+This directory shows how to compose `eng-code-skills` on demand. It does **not** replace the per-skill `examples/` directories.
+
+## 1) Install a single backend refactor skill
 
 ```bash
 npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-refactor
 ```
 
-对话示例：
+Sample prompt:
 
 ```text
-使用 backend-code-refactor 重构 OrderService.place()：
-- 只做结构优化
-- 不要改变事务与接口返回
-- 输出必须含风险警告与人工校验点
+Use backend-code-refactor on OrderService.place():
+- Structure-only changes
+- Do not alter transactions or API responses
+- Include risk warnings and a manual verification checklist
 ```
 
-## 2) 前端评审 + 通用债务扫描（多技能组合）
+## 2) Combine frontend review + general tech-debt scan
 
 ```bash
 npx agentskills load github:Powerff/eng-code-skills#skills/frontend-code-review
 npx agentskills load github:Powerff/eng-code-skills#skills/tech-debt-scan
 ```
 
-先评审 PR，再对同一模块做债务台账；两者都**不自动改业务逻辑**。
+Review the PR first, then inventory debt for the same module. Neither skill should silently change business logic.
 
-## 3) 全量安装
+## 3) Install the full suite
 
 ```bash
 npx agentskills load github:Powerff/eng-code-skills
 ```
 
-适合团队统一基线；个人日常仍建议单技能按需加载以节省上下文。
+Useful for a shared team baseline. Day-to-day work still benefits from loading one skill at a time to keep context smaller.
 
-## 4) Cursor 远程单技能
+## 4) Cursor: load a single skill remotely
 
 ```text
 Load skill from github:Powerff/eng-code-skills/skills/frontend-code-refactor
 Split this React component without changing UX behavior.
 ```
+
+## Per-skill samples
+
+Each skill ships bilingual samples under `skills/<name>/examples/`:
+
+- `basic.md` — English
+- `basic.zh-CN.md` — Chinese

@@ -139,7 +139,7 @@ eng-code-skills/
 └── .github/workflows/
 ```
 
-更多用法说明见 [`examples/`](./examples/)。各技能目录下的 `examples/` 含对应示例。
+更多用法说明见 [`examples/README.zh-CN.md`](./examples/README.zh-CN.md)（[English](./examples/README.md)）。各技能目录下的 `examples/` 提供双语示例（`basic.md` / `basic.zh-CN.md`）。
 
 ---
 

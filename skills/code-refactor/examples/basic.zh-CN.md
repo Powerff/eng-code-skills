@@ -1,11 +1,11 @@
-# code-refactor example
+# 通用安全重构 示例
 
 [English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## Scenario
-Shows the expected output shape for a typical input.
+## 场景
+演示本技能在典型输入上的期望产出形态。
 
-## Input (Before)
+## 输入（Before）
 
 ```text
 async function handle(req) {
@@ -18,7 +18,7 @@ async function handle(req) {
 }
 ```
 
-## Expected output highlights
+## 期望产出要点
 
 ```text
 async function handle(req) {
@@ -44,8 +44,8 @@ function toUserResponse(user) {
 }
 ```
 
-## Notes
-Extracts helpers and renames only; validation, default name, email copy, and response fields are unchanged.
+## 说明
+仅提取函数与命名；校验、默认名、邮件文案、返回字段均不变。
 
-## Reminder
-All findings are advisory. Require human review and tests before shipping.
+## 提醒
+所有结论仅供参考，上线前必须人工评审与测试。

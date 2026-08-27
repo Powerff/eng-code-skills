@@ -1,25 +1,27 @@
-# 前端技术债务扫描 示例
+# frontend-tech-debt-scan example
 
-## 场景
-演示本技能在典型输入上的期望产出形态。
+[English](./basic.md) · [中文](./basic.zh-CN.md)
 
-## 输入（Before）
+## Scenario
+Shows the expected output shape for a typical input.
+
+## Input (Before)
 
 ```text
 // God component 800+ lines mixing fetch, form, chart, modal
 ```
 
-## 期望产出要点
+## Expected output highlights
 
 ```text
-（债务报告示例）
-P1 页面组件 800+ 行，视图与数据耦合
-P2 同时使用 Redux 与临时 Context 存同一用户会话
-P2 多处 document.addEventListener 无移除
+(sample debt report)
+P1 Page component 800+ lines; view coupled to data fetching
+P2 Redux and ad-hoc Context both store the same user session
+P2 Multiple document.addEventListener calls without removal
 ```
 
-## 说明
-扫描报告不自动拆仓。
+## Notes
+Scan reports do not automatically split the codebase.
 
-## 提醒
-所有结论仅供参考，上线前必须人工评审与测试。
+## Reminder
+All findings are advisory. Require human review and tests before shipping.
