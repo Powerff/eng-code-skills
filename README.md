@@ -44,6 +44,73 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 
 ---
 
+## Plan-only vs writes to your repo
+
+Use this to pick the right skill (and the right kit).
+
+### A) Report / plan first (default does **not** overwrite the tree)
+
+These skills produce findings, plans, and example Diffs. They only apply structure-level edits when you **explicitly** ask to land changes — and still forbid silent business-logic changes.
+
+| Kind | Skills |
+| --- | --- |
+| General | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` |
+| Backend analysis | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
+| Frontend analysis | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
+| Standards / optimize | `backend-code-standards` · `backend-code-optimize` |
+
+**How to use (Cursor):**
+
+```text
+Load skill from github:Powerff/eng-code-skills/skills/backend-api-layer-check
+Audit Controller/Service/DTO layering in src/main/java/... — report only, do not edit files.
+```
+
+**How to use (agentskills):**
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/code-style-check
+```
+
+### B) Will change the working tree (workflows)
+
+These skills are allowed to edit files / run commands as part of a phased loop. None of them should skip verification/cleanup rules in their prompt. Commit/push only when the skill says so (or you ask).
+
+| Skill | Writes code? | Commit/push? |
+| --- | --- | --- |
+| `backend-bug-fix` | Yes (fix path) | No (unless you ask separately) |
+| `backend-implement-verify` | Yes | No |
+| `backend-implement-verify-restart` | Yes | No |
+| `backend-implement-verify-commit` | Yes | Yes (commit + push) |
+| `backend-code-commit` | Staging/commit only | Yes |
+| `backend-project-refactor` | Yes (after plan review) | Per phase / your request |
+| `frontend-project-refactor` | Yes (after plan review) | Per phase / your request |
+| `backend-stack-upgrade` | Yes (toolchain + needed code) | No (pair with commit skill) |
+
+**How to use — feature loop without commit:**
+
+```text
+@backend-implement-verify
+Implement X, verify with tests/curl, stop any servers you started. Do not commit.
+```
+
+**How to use — JDK 17→21 full landing:**
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-stack-upgrade
+```
+
+```text
+@backend-stack-upgrade
+Upgrade this backend JDK 17 → 21. Keep API contracts. Do not commit.
+```
+
+### C) Repo-wide plan only → use codebase-agent-kit
+
+All **8** skills in [codebase-agent-kit](https://github.com/Powerff/codebase-agent-kit) are **plan-only** (architecture context, global refactor plan, debt audit, migration plan, module split, audits). They must **not** overwrite the repository. After you accept a plan, land it with eng-code-skills workflows above.
+
+---
+
 ## Design constraints
 
 **Analysis / safe-optimize skills** (style, refactor, debt, review, standards, optimize, hooks, component audit, API layer):

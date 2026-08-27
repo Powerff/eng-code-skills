@@ -44,6 +44,73 @@
 
 ---
 
+## 只出方案 vs 会改仓库
+
+按这个表选 Skill（以及选哪一套 kit）。
+
+### A) 默认只出报告 / 方案（不覆盖工作树）
+
+产出检查结果、方案与示例 Diff。只有你**明确要求落地**时，才做结构级修改；仍禁止静默改业务语义。
+
+| 类型 | Skills |
+| --- | --- |
+| 通用 | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` |
+| 后端分析 | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
+| 前端分析 | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
+| 规范 / 优化 | `backend-code-standards` · `backend-code-optimize` |
+
+**Cursor 用法：**
+
+```text
+Load skill from github:Powerff/eng-code-skills/skills/backend-api-layer-check
+检查 src/main/java/... 的分层，只出报告，不要改文件。
+```
+
+**agentskills：**
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/code-style-check
+```
+
+### B) 会改工作区（工作流）
+
+按阶段改文件 / 跑命令。验证与清理规则不可跳过。是否 commit/push 以各 Skill 说明为准。
+
+| Skill | 改代码？ | Commit/push？ |
+| --- | --- | --- |
+| `backend-bug-fix` | 会（修复路径） | 默认否 |
+| `backend-implement-verify` | 会 | 否 |
+| `backend-implement-verify-restart` | 会 | 否 |
+| `backend-implement-verify-commit` | 会 | 是 |
+| `backend-code-commit` | 仅提交相关 | 是 |
+| `backend-project-refactor` | 会（方案审查后） | 按阶段 / 你的要求 |
+| `frontend-project-refactor` | 会（方案审查后） | 按阶段 / 你的要求 |
+| `backend-stack-upgrade` | 会（工具链+必要代码） | 否（再接 commit Skill） |
+
+**功能开发（不提交）：**
+
+```text
+@backend-implement-verify
+实现 X，用测试/curl 验证，停掉你启动的服务。不要 commit。
+```
+
+**JDK 17→21 落地：**
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-stack-upgrade
+```
+
+```text
+@backend-stack-upgrade
+JDK 17 → 21。保持 API 契约。不要 commit。
+```
+
+### C) 全仓只出方案 → codebase-agent-kit
+
+[codebase-agent-kit](https://github.com/Powerff/codebase-agent-kit) 的 **8** 个 Skill **全部只出方案**（上下文、全局重构计划、债务、迁移、拆分、审计），禁止覆盖仓库。方案确认后再用上方 eng-code-skills 工作流落地。
+
+---
+
 ## 设计约束
 
 **分析 / 安全优化类**（style、refactor、debt、review、standards、optimize、hooks、component audit、API layer）：
