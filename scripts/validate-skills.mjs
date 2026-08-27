@@ -77,6 +77,34 @@ const LOGIC_SAFE_SNIPPETS = [
   '行为不变',
 ];
 
+/** Hosts / runtimes every skill must declare (mainstream LLM tooling). */
+const REQUIRED_COMPATIBILITY = [
+  'agentskills.io',
+  'Cursor',
+  'Claude Code',
+  'ChatGPT',
+  'GitHub Copilot',
+  'Gemini',
+  'Continue',
+  'Cline',
+  'Roo Code',
+  'Windsurf',
+  'Trae',
+  'manual-prompt',
+];
+
+/** Model families every skill must declare. */
+const REQUIRED_MODEL_FAMILIES = [
+  'OpenAI GPT',
+  'Anthropic Claude',
+  'Google Gemini',
+  'DeepSeek',
+  'Qwen',
+  'Moonshot Kimi',
+  'xAI Grok',
+  'other tool-using coding LLMs',
+];
+
 const CATEGORY_PREFIX = {
   general: (n) => !n.startsWith('backend-') && !n.startsWith('frontend-'),
   backend: (n) => n.startsWith('backend-'),
@@ -179,6 +207,27 @@ function main() {
     if (!meta.inputSchema || !meta.outputSchema) {
       fail(`${name}: skill.json missing inputSchema/outputSchema`, errors);
     }
+    if (!Array.isArray(meta.compatibility) || meta.compatibility.length === 0) {
+      fail(`${name}: skill.json missing compatibility[]`, errors);
+    } else {
+      for (const host of REQUIRED_COMPATIBILITY) {
+        if (!meta.compatibility.includes(host)) {
+          fail(`${name}: skill.json compatibility missing host: ${host}`, errors);
+        }
+      }
+    }
+    if (!Array.isArray(meta.modelFamilies) || meta.modelFamilies.length === 0) {
+      fail(`${name}: skill.json missing modelFamilies[]`, errors);
+    } else {
+      for (const family of REQUIRED_MODEL_FAMILIES) {
+        if (!meta.modelFamilies.includes(family)) {
+          fail(`${name}: skill.json modelFamilies missing: ${family}`, errors);
+        }
+      }
+    }
+    if (!meta.runtimeNotes || typeof meta.runtimeNotes !== 'string') {
+      fail(`${name}: skill.json missing runtimeNotes`, errors);
+    }
     // Common mandatory outputs across analysis + workflow skills
     for (const key of ['summary', 'riskWarnings', 'manualChecks']) {
       if (!meta.outputSchema?.properties?.[key]) {
@@ -244,6 +293,8 @@ function main() {
           total: entries.length,
           expected: EXPECTED.length,
           byCategory,
+          requiredCompatibility: REQUIRED_COMPATIBILITY,
+          requiredModelFamilies: REQUIRED_MODEL_FAMILIES,
           skills: entries,
           errors,
           warnings,
@@ -259,6 +310,9 @@ function main() {
     console.log(`\nAll ${entries.length} skills validated.`);
     console.log(
       `By category: general=${byCategory.general} backend=${byCategory.backend} frontend=${byCategory.frontend}`,
+    );
+    console.log(
+      `LLM coverage: ${REQUIRED_COMPATIBILITY.length} hosts · ${REQUIRED_MODEL_FAMILIES.length} model families`,
     );
   } else {
     console.error(`\nValidation failed with ${errors.length} error(s).`);

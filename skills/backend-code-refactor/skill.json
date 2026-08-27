@@ -8,7 +8,16 @@
   "compatibility": [
     "agentskills.io",
     "Cursor",
-    "Claude Code"
+    "Claude Code",
+    "ChatGPT",
+    "GitHub Copilot",
+    "Gemini",
+    "Continue",
+    "Cline",
+    "Roo Code",
+    "Windsurf",
+    "Trae",
+    "manual-prompt"
   ],
   "tags": [
     "backend",
@@ -80,5 +89,16 @@
       "riskWarnings",
       "manualChecks"
     ]
-  }
+  },
+  "modelFamilies": [
+    "OpenAI GPT",
+    "Anthropic Claude",
+    "Google Gemini",
+    "DeepSeek",
+    "Qwen",
+    "Moonshot Kimi",
+    "xAI Grok",
+    "other tool-using coding LLMs"
+  ],
+  "runtimeNotes": "Prompt-based and model-agnostic. Works with any mainstream coding LLM that can follow structured instructions. Prefer long-context, tool-using models for workflow skills (implement/verify, project refactor)."
 }

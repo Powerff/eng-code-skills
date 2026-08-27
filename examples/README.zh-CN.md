@@ -79,6 +79,10 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standard
 
 快速体检 DTO/VO/Entity 边界用 `backend-api-layer-check`；需要完整 Java/Spring 编码规范包时用 `backend-code-standards`。
 
+## 9) 同一技能用于 ChatGPT / Gemini / Copilot / DeepSeek…
+
+见 [multi-llm.zh-CN.md](./multi-llm.zh-CN.md)（[English](./multi-llm.md)）与完整矩阵 [COMPATIBILITY.zh-CN.md](../COMPATIBILITY.zh-CN.md)。
+
 ## 各技能示例
 
 每个技能目录下提供双语示例 `skills/<name>/examples/`：

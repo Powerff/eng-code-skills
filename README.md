@@ -4,9 +4,9 @@
 
 Agent skill pack for engineering workflows: style checks, safe refactors, tech-debt scans, code review, **frontend Hooks / component audits**, **backend API layer checks**, backend delivery workflows, plus **project-level frontend/backend refactor** skills (call-chain analysis → plan review → implement → CR → test loop).
 
-Compatible with [agentskills.io](https://agentskills.io), Cursor, and Claude Code. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`).
+Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok, …) and hosts such as [agentskills.io](https://agentskills.io), Cursor, Claude Code, ChatGPT, GitHub Copilot, Continue, Cline, Windsurf, and Trae. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`). See [COMPATIBILITY.md](./COMPATIBILITY.md).
 
-**Version:** 0.2.0 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 24 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md)
+**Version:** 0.2.1 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 24 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md)
 
 ---
 
@@ -14,7 +14,7 @@ Compatible with [agentskills.io](https://agentskills.io), Cursor, and Claude Cod
 
 - [General](#general) · [Backend analysis](#backend-analysis) · [Backend workflows](#backend-workflows) · [Frontend](#frontend)
 - [When to use which](#when-to-use-which) · [Design constraints](#design-constraints) · [Installation](#installation) · [Layout](#skill-package-layout) · [Validate](#validate-locally)
-- [Examples](./examples/README.md) ([中文](./examples/README.zh-CN.md))
+- [Compatibility](./COMPATIBILITY.md) ([中文](./COMPATIBILITY.zh-CN.md)) · [Examples](./examples/README.md) ([中文](./examples/README.zh-CN.md)) · [Multi-LLM](./examples/multi-llm.md)
 
 | Jump | Skills |
 | --- | --- |
@@ -128,6 +128,8 @@ Focus: fat components, state misuse, effect leaks, **Hooks**, props, redundant r
 
 ## Installation
 
+Skills are **model-agnostic**: paste `prompt.md` into any mainstream LLM, or load via a host below. Full matrix: [COMPATIBILITY.md](./COMPATIBILITY.md) · recipes: [examples/multi-llm.md](./examples/multi-llm.md).
+
 ### agentskills / Claude Code
 
 ```bash
@@ -152,12 +154,29 @@ Audit this page component and propose a split that keeps UX identical.
 
 Or copy `skills/<name>/` into `.cursor/skills/`.
 
+### ChatGPT · Gemini · Copilot · Continue · Cline · Windsurf · Trae
+
+1. Open `skills/<name>/prompt.md` (include `reference.md` when present).
+2. Paste into Project / Gem / custom instructions / agent mode prompt.
+3. Provide the target code or diff and require **risk warnings** + **manual checks**.
+
+### Universal manual prompt (any LLM)
+
+```text
+You must follow the skill prompt below exactly.
+Target: <path or paste>
+---
+<paste skills/<name>/prompt.md>
+---
+```
+
+Works with OpenAI GPT, Anthropic Claude, Google Gemini, DeepSeek, Qwen, Kimi, Grok, and other tool-using coding models.
+
 ### Manual / offline
 
 1. Clone this repository.
 2. Copy the desired `skills/<name>/` folder (include `reference.md` when present).
-3. Place under `~/.claude/skills/` or `<project>/.cursor/skills/`.
-
+3. Place under `~/.claude/skills/`, `<project>/.cursor/skills/`, or your host’s skill/rules directory.
 ---
 
 ## Skill package layout
@@ -191,13 +210,15 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) to add skills.
 eng-code-skills/
 ├── README.md
 ├── README.zh-CN.md
+├── COMPATIBILITY.md
+├── COMPATIBILITY.zh-CN.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── package.json
 ├── scripts/validate-skills.mjs
 ├── skills/                 # 24 skills
-├── examples/               # Composition examples (EN + zh-CN)
+├── examples/               # Composition + multi-LLM examples
 └── .github/workflows/      # CI validation
 ```
 

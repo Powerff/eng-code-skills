@@ -1,7 +1,7 @@
 {
   "name": "eng-code-skills",
-  "version": "0.2.0",
-  "description": "Agent skills for engineering: style/refactor/debt/review, frontend hooks/component audits, backend API layer checks, plus backend delivery workflows and project-level refactors.",
+  "version": "0.2.1",
+  "description": "Model-agnostic agent skills for engineering (GPT/Claude/Gemini/DeepSeek/Qwen/Kimi/Grok + Cursor/Copilot/Continue/Cline): style/refactor/debt/review, hooks/component audits, API layer checks, backend delivery workflows, project refactors.",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -15,6 +15,13 @@
     "code-quality",
     "code-review",
     "llm-agent",
+    "openai",
+    "claude",
+    "gemini",
+    "deepseek",
+    "qwen",
+    "chatgpt",
+    "github-copilot",
     "backend",
     "frontend",
     "java",

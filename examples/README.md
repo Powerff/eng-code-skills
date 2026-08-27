@@ -79,6 +79,10 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standard
 
 Use `backend-api-layer-check` for a fast DTO/VO/Entity boundary pass; use `backend-code-standards` when you need the full Java/Spring coding standards pack.
 
+## 9) Same skill on ChatGPT / Gemini / Copilot / DeepSeek…
+
+See [multi-llm.md](./multi-llm.md) ([中文](./multi-llm.zh-CN.md)) and the full matrix in [COMPATIBILITY.md](../COMPATIBILITY.md).
+
 ## Per-skill samples
 
 Each skill ships bilingual samples under `skills/<name>/examples/`:

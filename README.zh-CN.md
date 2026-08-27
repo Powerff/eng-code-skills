@@ -4,9 +4,9 @@
 
 工程向 Agent Skills 套件：覆盖规范检查、安全重构、技术债务扫描、代码评审、**前端 Hooks / 组件审计**、**后端接口分层检查**、后端交付工作流，以及**前后端项目级重构**技能（链路分析 → 方案审查 → 编码 → CR → 测试闭环）。
 
-兼容 [agentskills.io](https://agentskills.io)、Cursor、Claude Code。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。
+兼容 **主流编码大模型**（GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok 等）以及 [agentskills.io](https://agentskills.io)、Cursor、Claude Code、ChatGPT、GitHub Copilot、Continue、Cline、Windsurf、Trae 等宿主。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。详见 [COMPATIBILITY.zh-CN.md](./COMPATIBILITY.zh-CN.md)。
 
-**版本：** 0.2.0 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 24 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md)
+**版本：** 0.2.1 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 24 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md)
 
 ---
 
@@ -14,7 +14,7 @@
 
 - [通用](#通用) · [后端分析](#后端分析) · [后端工作流](#后端工作流) · [前端](#前端)
 - [怎么选技能](#怎么选技能) · [设计约束](#设计约束) · [安装](#安装) · [目录结构](#单技能目录结构) · [本地校验](#本地校验)
-- [示例](./examples/README.zh-CN.md)（[English](./examples/README.md)）
+- [兼容性](./COMPATIBILITY.zh-CN.md)（[English](./COMPATIBILITY.md)） · [示例](./examples/README.zh-CN.md)（[English](./examples/README.md)） · [多模型](./examples/multi-llm.zh-CN.md)
 
 | 跳转 | 技能 |
 | --- | --- |
@@ -128,6 +128,8 @@
 
 ## 安装
 
+技能 **与模型无关**：可将 `prompt.md` 粘贴到任意主流大模型，或通过下方宿主加载。完整矩阵：[COMPATIBILITY.zh-CN.md](./COMPATIBILITY.zh-CN.md) · 配方：[examples/multi-llm.zh-CN.md](./examples/multi-llm.zh-CN.md)。
+
 ### agentskills / Claude Code
 
 ```bash
@@ -152,12 +154,29 @@ Load skill from github:Powerff/eng-code-skills/skills/frontend-component-audit
 
 或将 `skills/<name>/` 复制到 `.cursor/skills/`。
 
+### ChatGPT · Gemini · Copilot · Continue · Cline · Windsurf · Trae
+
+1. 打开 `skills/<name>/prompt.md`（若有 `reference.md` 一并带上）。
+2. 粘贴到 Project / Gem / 自定义指令 / Agent 模式提示词。
+3. 提供目标代码或 diff，并要求输出 **风险警告** 与 **人工校验**。
+
+### 通用手动提示（任意大模型）
+
+```text
+你必须严格遵循下方技能提示词。
+目标：<路径或粘贴代码>
+---
+<粘贴 skills/<name>/prompt.md>
+---
+```
+
+适用于 OpenAI GPT、Anthropic Claude、Google Gemini、DeepSeek、Qwen、Kimi、Grok 及其它工具调用型编码模型。
+
 ### 手动 / 离线
 
 1. Clone 本仓库。
 2. 复制所需 `skills/<name>/`（若有 `reference.md` 一并带上）。
-3. 放到 `~/.claude/skills/` 或 `<project>/.cursor/skills/`。
-
+3. 放到 `~/.claude/skills/`、`<project>/.cursor/skills/` 或宿主对应的 skills/rules 目录。
 ---
 
 ## 单技能目录结构
@@ -191,13 +210,15 @@ npm run validate:json
 eng-code-skills/
 ├── README.md
 ├── README.zh-CN.md
+├── COMPATIBILITY.md
+├── COMPATIBILITY.zh-CN.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── package.json
 ├── scripts/validate-skills.mjs
 ├── skills/                 # 24 个技能
-├── examples/               # 组合示例（中英）
+├── examples/               # 组合示例 + 多模型示例
 └── .github/workflows/      # CI 校验
 ```
 

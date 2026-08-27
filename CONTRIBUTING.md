@@ -8,6 +8,7 @@ Thanks for improving **eng-code-skills**. Every skill must stay **self-contained
 2. **Logic-safe by default** for analysis / safe-optimize skills — include 严禁修改业务逻辑 (or equivalent) plus **风险警告** and **人工校验**.
 3. **Bilingual examples** — every skill ships `examples/basic.md` + `examples/basic.zh-CN.md`.
 4. **Minimal diffs** — match existing tone and output section order.
+5. **Model-agnostic** — keep `prompt.md` runnable by pasting into any mainstream LLM; declare shared `compatibility` + `modelFamilies` + `runtimeNotes` in `skill.json` (see [COMPATIBILITY.md](./COMPATIBILITY.md)).
 
 ## Add a new skill
 
@@ -20,7 +21,7 @@ Required files:
 ```text
 skills/<skill-name>/
 ├── SKILL.md           # YAML frontmatter + same body as prompt.md
-├── skill.json         # name, description, version, category, I/O schema
+├── skill.json         # name, description, version, category, I/O schema, compatibility, modelFamilies
 ├── prompt.md          # standalone prompt
 └── examples/
     ├── basic.md
@@ -31,10 +32,11 @@ Checklist:
 
 1. `skill.json` `name` equals folder name.
 2. `SKILL.md` frontmatter `name:` matches.
-3. `outputSchema` includes `summary`, `diff`, `riskWarnings`, `manualChecks`.
-4. Register the folder in `scripts/validate-skills.mjs` → `EXPECTED` (and `LOGIC_SAFE` if applicable).
-5. Link it from `README.md` + `README.zh-CN.md`.
-6. Add a short entry to `CHANGELOG.md` and a composition note under `examples/` when useful.
+3. `outputSchema` includes at least `summary`, `riskWarnings`, `manualChecks` (plus `diff` when the skill produces code).
+4. `compatibility` / `modelFamilies` include the required shared lists (copy from any existing skill).
+5. Register the folder in `scripts/validate-skills.mjs` → `EXPECTED` (and `LOGIC_SAFE` if applicable).
+6. Link it from `README.md` + `README.zh-CN.md`.
+7. Add a short entry to `CHANGELOG.md` and a composition note under `examples/` when useful.
 
 ```bash
 npm run validate
