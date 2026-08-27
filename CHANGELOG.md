@@ -2,6 +2,11 @@
 
 All notable changes to **eng-code-skills** are documented here.
 
+## [0.2.2] — 2026-08-27
+
+### Added
+- **`backend-stack-upgrade`** — Full backend stack/runtime upgrade loop: graphify → upgrade plan → code/toolchain changes → verify → stop services (no auto commit). Primary example: JDK 17 → 21. Complements plan-only `codebase-agent-kit/codebase-migration-plan`.
+
 ## [0.2.1] — 2026-08-27
 
 ### Added

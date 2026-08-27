@@ -6,7 +6,7 @@
 
 兼容 **主流编码大模型**（GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok 等）以及 [agentskills.io](https://agentskills.io)、Cursor、Claude Code、ChatGPT、GitHub Copilot、Continue、Cline、Windsurf、Trae 等宿主。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。详见 [COMPATIBILITY.zh-CN.md](./COMPATIBILITY.zh-CN.md)。
 
-**版本：** 0.2.1 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 24 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md)
+**版本：** 0.2.2 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 25 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md)
 
 ---
 
@@ -20,7 +20,7 @@
 | --- | --- |
 | [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [后端分析](#后端分析) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
-| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) |
+| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
 | [前端](#前端) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -40,6 +40,7 @@
 | 有证据的 Bug 修复 | `backend-bug-fix` | — |
 | 完整交付闭环 | `backend-implement-verify-commit` | `backend-code-standards` |
 | 大型服务 / 前端迁移 | `backend-project-refactor` / `frontend-project-refactor` | — |
+| JDK / 运行时 / 工具链升级（方案→改码→验证） | `backend-stack-upgrade` | 只出方案：`codebase-agent-kit` 的 `codebase-migration-plan` |
 
 ---
 
@@ -109,6 +110,7 @@
 | [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) | `implement-verify-commit` | 含 commit/push 的完整闭环，再停服 |
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | 验证 → 停会话服务 → 为用户重启（不提交） |
 | [`backend-project-refactor`](./skills/backend-project-refactor/) | 服务重构方法论 | 调用链分析 → 方案审查 → 分层编码 → CR → 测试闭环 |
+| [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) | 技术栈 / JDK 升级 | 图谱 → 升级方案 → 工具链/代码 → 验证 → 停服（不自动提交） |
 
 ### 前端
 

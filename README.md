@@ -6,7 +6,7 @@ Agent skill pack for engineering workflows: style checks, safe refactors, tech-d
 
 Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok, …) and hosts such as [agentskills.io](https://agentskills.io), Cursor, Claude Code, ChatGPT, GitHub Copilot, Continue, Cline, Windsurf, and Trae. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`). See [COMPATIBILITY.md](./COMPATIBILITY.md).
 
-**Version:** 0.2.1 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 24 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md)
+**Version:** 0.2.2 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 25 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md)
 
 ---
 
@@ -20,7 +20,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | --- | --- |
 | [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [Backend analysis](#backend-analysis) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
-| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) |
+| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
 | [Frontend](#frontend) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -40,6 +40,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | Evidence-based bug fix | `backend-bug-fix` | — |
 | Full delivery loop (graphify → verify → commit) | `backend-implement-verify-commit` | `backend-code-standards` |
 | Large service / frontend migration | `backend-project-refactor` / `frontend-project-refactor` | — |
+| JDK / runtime / toolchain upgrade (plan → code → verify) | `backend-stack-upgrade` | plan-only: `codebase-agent-kit` `codebase-migration-plan` |
 
 ---
 
@@ -109,6 +110,7 @@ Packaged from Cursor technical skills used in day-to-day backend delivery. Cross
 | [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) | `implement-verify-commit` | Full loop including commit/push, then stop services |
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | Verify → stop session services → restart for the user (no commit) |
 | [`backend-project-refactor`](./skills/backend-project-refactor/) | service-refactor methodology | Call-chain analysis → plan review → layered code → CR → test loop |
+| [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) | stack / JDK upgrade | graphify → upgrade plan → toolchain/code → verify → stop (no commit) |
 
 ### Frontend
 

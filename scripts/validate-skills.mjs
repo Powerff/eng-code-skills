@@ -39,6 +39,7 @@ const EXPECTED = [
   'backend-implement-verify-commit',
   'backend-implement-verify-restart',
   'backend-project-refactor',
+  'backend-stack-upgrade',
   // frontend
   'frontend-code-style-check',
   'frontend-code-refactor',

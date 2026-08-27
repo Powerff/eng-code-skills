@@ -1,7 +1,7 @@
 {
   "name": "eng-code-skills",
-  "version": "0.2.1",
-  "description": "Model-agnostic agent skills for engineering (GPT/Claude/Gemini/DeepSeek/Qwen/Kimi/Grok + Cursor/Copilot/Continue/Cline): style/refactor/debt/review, hooks/component audits, API layer checks, backend delivery workflows, project refactors.",
+  "version": "0.2.2",
+  "description": "Model-agnostic agent skills for engineering (GPT/Claude/Gemini/DeepSeek/Qwen/Kimi/Grok + Cursor/Copilot/Continue/Cline): style/refactor/debt/review, hooks/component audits, API layer checks, backend delivery workflows, stack upgrades, project refactors.",
   "license": "MIT",
   "private": true,
   "engines": {
