@@ -1,139 +1,122 @@
 # eng-code-skills
 
-**标准化、可按需安装、前后端分离的 AI Agent 代码工程技能套件**
+[English](./README.md) · [中文](./README.zh-CN.md)
 
-MIT Licensed · v0.1.0 · Compatible with [agentskills.io](https://agentskills.io) / Cursor / Claude Code
+Agent skills for code style checks, safe refactoring, technical debt scanning, and code review.
 
----
+Designed for [agentskills.io](https://agentskills.io)-compatible runtimes, including Cursor and Claude Code. Skills are packaged independently so you can install a single skill or the full set. The suite is organized into **general**, **backend**, and **frontend** domains.
 
-## 核心卖点
-
-- ✅ **单 Skill 独立安装**，轻量即用，无需下载全套仓库
-- ✅ **前后端分离专项规则**，不通用、不敷衍
-- ✅ **零业务篡改**：安全重构，工程师放心用
-- ✅ **标准 agentskills.io 规范**，Cursor / Claude Code 全适配
+**Version:** 0.1.0 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18
 
 ---
 
-## English Overview
+## Design constraints
 
-`eng-code-skills` is a suite of **12 self-contained Agent Skills** for style checks, safe refactors, tech-debt scans, and code reviews — split into **general / backend / frontend**. Every skill refuses silent business-logic changes and always emits **risk warnings + manual checklists**.
+All skills share the same operating rules:
+
+1. Do not change business logic. Allowed changes are limited to structure, naming, conventions, duplication, and code smells.
+2. Business bugs and logic errors are reported as risks only; they are not auto-fixed.
+3. Every response must include risk warnings and a manual verification checklist.
+4. Backend skills prioritize data safety, transactions, concurrency, and resource lifecycle.
+5. Frontend skills prioritize state stability, controlled side effects, and render performance.
+
+### Response format
+
+1. Execution summary  
+2. Diff (or “no code changes” for scan/review-only runs)  
+3. Complete updated code (when applicable)  
+4. Risk warnings (required)  
+5. Manual verification checklist (required)
 
 ---
 
-## 技能清单（12）
+## Skills
 
-### 通用（General）
+### General
 
-| Skill | 能力 |
+| Skill | Description |
 | --- | --- |
-| `code-style-check` | 通用规范与坏味道检测 |
-| `code-refactor` | 通用安全重构（不改业务） |
-| `tech-debt-scan` | 通用技术债务扫描 |
-| `code-review` | 通用代码评审 |
+| `code-style-check` | Language-agnostic style and smell detection |
+| `code-refactor` | Structure-preserving refactoring |
+| `tech-debt-scan` | Project-level technical debt inventory |
+| `code-review` | General-purpose code review |
 
-### 后端（Java / Go / Python 等）
+### Backend (Java / Go / Python and similar)
 
-重点：事务、异常吞捕获、N+1、并发、资源泄露、硬编码密钥、参数校验、数据库风险
+Focus areas: transactions, swallowed exceptions, N+1 queries, concurrency, resource leaks, hardcoded secrets, input validation, and database risk.
 
-| Skill | 能力 |
+| Skill | Description |
 | --- | --- |
-| `backend-code-style-check` | 后端规范检查 |
-| `backend-code-refactor` | 后端安全重构 |
-| `backend-tech-debt-scan` | 后端技术债务扫描 |
-| `backend-code-review` | 后端代码评审 |
+| `backend-code-style-check` | Backend style and risk checklist |
+| `backend-code-refactor` | Backend structure-preserving refactoring |
+| `backend-tech-debt-scan` | Backend technical debt inventory |
+| `backend-code-review` | Backend-oriented code review |
 
-### 前端（JS / TS / React / Vue）
+### Frontend (JavaScript / TypeScript / React / Vue)
 
-重点：组件臃肿、状态滥用、副作用泄露、内存泄漏、Props、渲染冗余、样式耦合、Hooks 规范
+Focus areas: oversized components, state misuse, effect leaks, memory leaks, props validation, redundant renders, style coupling, and Hooks conventions.
 
-| Skill | 能力 |
+| Skill | Description |
 | --- | --- |
-| `frontend-code-style-check` | 前端规范检查 |
-| `frontend-code-refactor` | 前端安全重构 |
-| `frontend-tech-debt-scan` | 前端技术债务扫描 |
-| `frontend-code-review` | 前端代码评审 |
+| `frontend-code-style-check` | Frontend style and risk checklist |
+| `frontend-code-refactor` | Frontend structure-preserving refactoring |
+| `frontend-tech-debt-scan` | Frontend technical debt inventory |
+| `frontend-code-review` | Frontend-oriented code review |
 
 ---
 
-## 强制规则（所有 Skill）
+## Installation
 
-1. **严禁修改业务逻辑**：只优化结构、命名、规范、重复与坏味道
-2. **发现业务 Bug**：只标记风险，不自动修复
-3. **每次输出必须包含**：风险警告 + 人工校验点
-4. 后端技能优先：数据安全、事务、并发、资源释放
-5. 前端技能优先：状态稳定、副作用可控、渲染性能
-
-### 统一输出结构
-
-1. 执行总结  
-2. Diff 对比  
-3. 完整新代码  
-4. 风险警告（必填）  
-5. 人工校验点（必填）
-
----
-
-## 安装与使用
-
-前置：**Node.js ≥ 18**
-
-> 将下方 `Powerff/eng-code-skills` 替换为你的 fork 路径（如需要）。
-
-### Claude Code（agentskills）
+### agentskills / Claude Code
 
 ```bash
-# 仅安装后端重构（推荐、轻量）
+# Single skill
 npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-refactor
-
-# 仅安装前端重构
 npx agentskills load github:Powerff/eng-code-skills#skills/frontend-code-refactor
-
-# 仅安装通用代码评审
 npx agentskills load github:Powerff/eng-code-skills#skills/code-review
 
-# 安装整套
+# Full suite
 npx agentskills load github:Powerff/eng-code-skills
 
-# 查看 / 卸载
+# List / remove
 npx agentskills list
 npx agentskills unload backend-code-refactor
 ```
 
-### Cursor（远程即用）
+### Cursor
 
-在对话中加载单个技能，例如：
+Load a skill remotely in chat:
 
 ```text
 Load skill from github:Powerff/eng-code-skills/skills/backend-code-refactor
 Refactor this code, keep all business logic unchanged.
 ```
 
-或将单个技能目录复制到项目 `.cursor/skills/`。
+Or copy `skills/<name>/` into the project’s `.cursor/skills/` directory.
 
-### 本地离线手动安装
+### Manual / offline
 
-1. `git clone https://github.com/Powerff/eng-code-skills.git`
-2. 复制需要的单个 `skills/<name>/` 文件夹
-3. 放到：
-   - Claude Code：`~/.claude/skills/`
-   - Cursor：项目目录 `.cursor/skills/`
+1. Clone the repository.
+2. Copy the desired `skills/<name>/` directory.
+3. Place it under:
+   - Claude Code: `~/.claude/skills/`
+   - Cursor: `<project>/.cursor/skills/`
 
 ---
 
-## 单 Skill 目录结构
+## Skill package layout
 
-每个技能均为自包含单元（无跨技能依赖）：
+Each skill is self-contained and has no cross-skill dependencies:
 
 ```text
 skills/<skill-name>/
-├── SKILL.md      # agentskills.io / Cursor / Claude Code 入口
-├── skill.json    # 元数据与入参出参 Schema
-├── prompt.md     # 完整独立提示词
-└── examples/     # 本技能演示案例
+├── SKILL.md      # Runtime entry (agentskills.io / Cursor / Claude Code)
+├── skill.json    # Metadata and input/output schema
+├── prompt.md     # Standalone prompt
+└── examples/     # Skill-local examples
 ```
 
-本地校验：
+Validate locally:
 
 ```bash
 npm run validate
@@ -142,38 +125,27 @@ npm run list-skills
 
 ---
 
-## 仓库结构
+## Repository layout
 
 ```text
 eng-code-skills/
 ├── README.md
+├── README.zh-CN.md
 ├── LICENSE
 ├── package.json
 ├── scripts/validate-skills.mjs
-├── skills/          # 12 个独立技能
-├── examples/        # 根级组合示例
+├── skills/
+├── examples/
 └── .github/workflows/
 ```
 
----
-
-## 示例
-
-见 [`examples/`](./examples/) 与各技能目录下的 `examples/basic.md`。
+Additional usage notes: [`examples/`](./examples/). Per-skill samples live under each skill’s `examples/` directory.
 
 ---
 
-## GitHub Topics（建议）
+## Disclaimer
 
-`ai-skill` `agent-skill` `engineering` `code-refactoring` `code-quality` `code-review` `llm-agent` `backend` `frontend` `java` `go` `python` `javascript` `typescript`
-
----
-
-## 风险声明
-
-本项目为 **AI 辅助工程工具**，所有重构、评审结果仅作为参考，存在 LLM 幻觉风险。**所有代码上线前必须人工评审 & 单元测试验证**。本项目不承担线上故障责任。
-
----
+This project provides AI-assisted engineering guidance. Outputs may contain model errors or hallucinations. Treat all suggestions as advisory. Require human review and automated tests before shipping changes. The authors accept no liability for production incidents resulting from use of these skills.
 
 ## License
 
