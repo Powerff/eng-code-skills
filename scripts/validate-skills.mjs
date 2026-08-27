@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 /**
  * Validate that every skill under skills/ is self-contained and complete.
+ *
+ * Flags:
+ *   --list       Print skill folder names
+ *   --json       Machine-readable summary (implies full validate)
+ *   --strict     Treat unexpected skill folders as failures
  */
 import fs from 'fs';
 import path from 'path';
@@ -24,6 +29,7 @@ const EXPECTED = [
   'backend-code-refactor',
   'backend-tech-debt-scan',
   'backend-code-review',
+  'backend-api-layer-check',
   // backend workflows (from Cursor tech skills)
   'backend-code-standards',
   'backend-code-optimize',
@@ -38,6 +44,8 @@ const EXPECTED = [
   'frontend-code-refactor',
   'frontend-tech-debt-scan',
   'frontend-code-review',
+  'frontend-hooks-check',
+  'frontend-component-audit',
   'frontend-project-refactor',
 ];
 
@@ -51,12 +59,15 @@ const LOGIC_SAFE = new Set([
   'backend-code-refactor',
   'backend-tech-debt-scan',
   'backend-code-review',
+  'backend-api-layer-check',
   'backend-code-standards',
   'backend-code-optimize',
   'frontend-code-style-check',
   'frontend-code-refactor',
   'frontend-tech-debt-scan',
   'frontend-code-review',
+  'frontend-hooks-check',
+  'frontend-component-audit',
 ]);
 
 const COMMON_SNIPPETS = ['风险警告', '人工校验'];
@@ -66,8 +77,15 @@ const LOGIC_SAFE_SNIPPETS = [
   '行为不变',
 ];
 
-function fail(msg) {
+const CATEGORY_PREFIX = {
+  general: (n) => !n.startsWith('backend-') && !n.startsWith('frontend-'),
+  backend: (n) => n.startsWith('backend-'),
+  frontend: (n) => n.startsWith('frontend-'),
+};
+
+function fail(msg, errors) {
   console.error(`FAIL: ${msg}`);
+  errors.push(msg);
   process.exitCode = 1;
 }
 
@@ -75,10 +93,25 @@ function hasAny(text, snippets) {
   return snippets.some((s) => text.includes(s));
 }
 
+function categorize(name) {
+  if (CATEGORY_PREFIX.backend(name)) return 'backend';
+  if (CATEGORY_PREFIX.frontend(name)) return 'frontend';
+  return 'general';
+}
+
 function main() {
   const listOnly = process.argv.includes('--list');
+  const asJson = process.argv.includes('--json');
+  const strict = process.argv.includes('--strict');
+  const errors = [];
+  const warnings = [];
+  const ok = [];
+
   if (!fs.existsSync(SKILLS_DIR)) {
-    fail('skills/ directory missing');
+    fail('skills/ directory missing', errors);
+    if (asJson) {
+      console.log(JSON.stringify({ ok: false, errors, warnings, skills: [] }, null, 2));
+    }
     return;
   }
 
@@ -95,31 +128,39 @@ function main() {
   }
 
   for (const name of EXPECTED) {
-    if (!entries.includes(name)) fail(`missing expected skill: ${name}`);
+    if (!entries.includes(name)) fail(`missing expected skill: ${name}`, errors);
   }
 
   for (const name of entries) {
     if (!EXPECTED.includes(name)) {
-      console.warn(`WARN: unexpected skill folder: ${name}`);
+      const msg = `unexpected skill folder: ${name}`;
+      if (strict) fail(msg, errors);
+      else {
+        console.warn(`WARN: ${msg}`);
+        warnings.push(msg);
+      }
     }
 
     const dir = path.join(SKILLS_DIR, name);
     for (const f of REQUIRED_FILES) {
       const p = path.join(dir, f);
-      if (!fs.existsSync(p)) fail(`${name}: missing ${f}`);
+      if (!fs.existsSync(p)) fail(`${name}: missing ${f}`, errors);
     }
     for (const d of REQUIRED_DIRS) {
       const p = path.join(dir, d);
       if (!fs.existsSync(p) || !fs.statSync(p).isDirectory()) {
-        fail(`${name}: missing ${d}/`);
+        fail(`${name}: missing ${d}/`, errors);
       }
     }
 
-    const examples = fs.readdirSync(path.join(dir, 'examples'));
-    if (examples.length === 0) fail(`${name}: examples/ is empty`);
-    for (const requiredExample of ['basic.md', 'basic.zh-CN.md']) {
-      if (!examples.includes(requiredExample)) {
-        fail(`${name}: missing examples/${requiredExample}`);
+    const examplesDir = path.join(dir, 'examples');
+    if (fs.existsSync(examplesDir)) {
+      const examples = fs.readdirSync(examplesDir);
+      if (examples.length === 0) fail(`${name}: examples/ is empty`, errors);
+      for (const requiredExample of ['basic.md', 'basic.zh-CN.md']) {
+        if (!examples.includes(requiredExample)) {
+          fail(`${name}: missing examples/${requiredExample}`, errors);
+        }
       }
     }
 
@@ -127,51 +168,100 @@ function main() {
     try {
       meta = JSON.parse(fs.readFileSync(path.join(dir, 'skill.json'), 'utf8'));
     } catch (e) {
-      fail(`${name}: skill.json invalid JSON: ${e.message}`);
+      fail(`${name}: skill.json invalid JSON: ${e.message}`, errors);
       continue;
     }
 
-    if (meta.name !== name) fail(`${name}: skill.json name mismatch (${meta.name})`);
-    if (!meta.description) fail(`${name}: skill.json missing description`);
+    if (meta.name !== name) fail(`${name}: skill.json name mismatch (${meta.name})`, errors);
+    if (!meta.description) fail(`${name}: skill.json missing description`, errors);
+    if (!meta.version) fail(`${name}: skill.json missing version`, errors);
+    if (!meta.category) fail(`${name}: skill.json missing category`, errors);
     if (!meta.inputSchema || !meta.outputSchema) {
-      fail(`${name}: skill.json missing inputSchema/outputSchema`);
+      fail(`${name}: skill.json missing inputSchema/outputSchema`, errors);
+    }
+    // Common mandatory outputs across analysis + workflow skills
+    for (const key of ['summary', 'riskWarnings', 'manualChecks']) {
+      if (!meta.outputSchema?.properties?.[key]) {
+        fail(`${name}: skill.json outputSchema missing ${key}`, errors);
+      }
     }
 
-    const skillMd = fs.readFileSync(path.join(dir, 'SKILL.md'), 'utf8');
-    if (!skillMd.startsWith('---')) fail(`${name}: SKILL.md missing YAML frontmatter`);
+    const skillMdPath = path.join(dir, 'SKILL.md');
+    const promptPath = path.join(dir, 'prompt.md');
+    if (!fs.existsSync(skillMdPath) || !fs.existsSync(promptPath)) continue;
+
+    const skillMd = fs.readFileSync(skillMdPath, 'utf8');
+    if (!skillMd.startsWith('---')) fail(`${name}: SKILL.md missing YAML frontmatter`, errors);
     if (!skillMd.includes(`name: ${name}`)) {
-      fail(`${name}: SKILL.md frontmatter name mismatch`);
+      fail(`${name}: SKILL.md frontmatter name mismatch`, errors);
     }
 
-    const prompt = fs.readFileSync(path.join(dir, 'prompt.md'), 'utf8');
+    const prompt = fs.readFileSync(promptPath, 'utf8');
     for (const snip of COMMON_SNIPPETS) {
-      if (!prompt.includes(snip)) fail(`${name}: prompt.md missing mandatory snippet: ${snip}`);
-      if (!skillMd.includes(snip)) fail(`${name}: SKILL.md missing mandatory snippet: ${snip}`);
+      if (!prompt.includes(snip)) fail(`${name}: prompt.md missing mandatory snippet: ${snip}`, errors);
+      if (!skillMd.includes(snip)) fail(`${name}: SKILL.md missing mandatory snippet: ${snip}`, errors);
     }
 
     if (LOGIC_SAFE.has(name)) {
       if (!hasAny(prompt, LOGIC_SAFE_SNIPPETS)) {
         fail(
           `${name}: prompt.md missing logic-safe constraint (${LOGIC_SAFE_SNIPPETS.join(' | ')})`,
+          errors,
         );
       }
       if (!hasAny(skillMd, LOGIC_SAFE_SNIPPETS)) {
         fail(
           `${name}: SKILL.md missing logic-safe constraint (${LOGIC_SAFE_SNIPPETS.join(' | ')})`,
+          errors,
         );
       }
     }
 
     // Independence: prompts must not reference sibling skills by relative path
     if (/skills\/[a-z0-9-]+\//.test(prompt) || /\.\.\/[a-z]/.test(prompt)) {
-      fail(`${name}: prompt.md appears to reference external skill paths`);
+      fail(`${name}: prompt.md appears to reference external skill paths`, errors);
     }
 
-    console.log(`OK  ${name}`);
+    const skillFailed = errors.some(
+      (e) => e.startsWith(`${name}:`) || e === `missing expected skill: ${name}`,
+    );
+    if (!skillFailed) {
+      ok.push(name);
+      if (!asJson) console.log(`OK  ${name}`);
+    }
+  }
+
+  const byCategory = { general: 0, backend: 0, frontend: 0 };
+  for (const name of entries) {
+    byCategory[categorize(name)] += 1;
+  }
+
+  if (asJson) {
+    console.log(
+      JSON.stringify(
+        {
+          ok: !process.exitCode,
+          total: entries.length,
+          expected: EXPECTED.length,
+          byCategory,
+          skills: entries,
+          errors,
+          warnings,
+        },
+        null,
+        2,
+      ),
+    );
+    return;
   }
 
   if (!process.exitCode) {
     console.log(`\nAll ${entries.length} skills validated.`);
+    console.log(
+      `By category: general=${byCategory.general} backend=${byCategory.backend} frontend=${byCategory.frontend}`,
+    );
+  } else {
+    console.error(`\nValidation failed with ${errors.length} error(s).`);
   }
 }
 

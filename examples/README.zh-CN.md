@@ -61,6 +61,24 @@ npx agentskills load github:Powerff/eng-code-skills#skills/frontend-project-refa
 
 方法论：链路/交互分析 → 人工方案审查 → 编码 → CR → 测试闭环（参考 [腾讯云开发者文章](https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg)）。
 
+## 7) 前端 Hooks + 组件审计
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-hooks-check
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-component-audit
+```
+
+先对热路径做 Hooks 清单，再审计页面组件拆分边界；两者都不应静默改 UX。
+
+## 8) 后端接口分层 vs 完整规范
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-api-layer-check
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standards
+```
+
+快速体检 DTO/VO/Entity 边界用 `backend-api-layer-check`；需要完整 Java/Spring 编码规范包时用 `backend-code-standards`。
+
 ## 各技能示例
 
 每个技能目录下提供双语示例 `skills/<name>/examples/`：

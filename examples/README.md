@@ -61,6 +61,24 @@ npx agentskills load github:Powerff/eng-code-skills#skills/frontend-project-refa
 
 Methodology: call/interaction-chain analysis → human plan review → implement → CR → test loop (adapted from [Tencent Cloud Developer article](https://mp.weixin.qq.com/s/kHpDP4yQoj5Vr0xGk2TDLg)).
 
+## 7) Frontend Hooks + component audit
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-hooks-check
+npx agentskills load github:Powerff/eng-code-skills#skills/frontend-component-audit
+```
+
+Run Hooks checklist first on the hot path, then audit the page component for split boundaries. Neither skill should silently change UX behavior.
+
+## 8) Backend API layering vs full standards
+
+```bash
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-api-layer-check
+npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standards
+```
+
+Use `backend-api-layer-check` for a fast DTO/VO/Entity boundary pass; use `backend-code-standards` when you need the full Java/Spring coding standards pack.
+
 ## Per-skill samples
 
 Each skill ships bilingual samples under `skills/<name>/examples/`:

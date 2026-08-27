@@ -1,0 +1,87 @@
+{
+  "name": "frontend-component-audit",
+  "displayName": "前端组件专项审计",
+  "version": "0.2.0",
+  "category": "frontend",
+  "description": "前端组件专项审计：职责边界、状态归属、Props、可测性、可复用与 a11y。Use when component audit, 组件拆分, fat component, 组件审计。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "component",
+    "audit",
+    "architecture",
+    "react"
+  ],
+  "focus": [
+    "responsibility",
+    "state-ownership",
+    "props",
+    "testability",
+    "reuse",
+    "a11y"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标组件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：React / Vue / 其他"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只审计某一页面）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

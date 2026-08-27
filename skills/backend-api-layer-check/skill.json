@@ -1,0 +1,89 @@
+{
+  "name": "backend-api-layer-check",
+  "displayName": "后端接口分层检查",
+  "version": "0.2.0",
+  "category": "backend",
+  "description": "后端接口分层检查：Controller/Service 边界、DTO/VO/Entity 隔离、禁止 Map 透传与 Entity 外泄。Use when API layer, DTO VO, 接口分层, Entity 对外。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "backend",
+    "api",
+    "dto",
+    "vo",
+    "layering",
+    "java",
+    "go",
+    "python"
+  ],
+  "focus": [
+    "controller-service-boundary",
+    "dto-vo-entity",
+    "no-map-passthrough",
+    "no-entity-leak",
+    "validation"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：Java / Go / Python"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只检查某一 Controller）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}

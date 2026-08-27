@@ -1,0 +1,86 @@
+{
+  "name": "frontend-hooks-check",
+  "displayName": "前端 Hooks 规范检查",
+  "version": "0.2.0",
+  "category": "frontend",
+  "description": "前端 Hooks 专项检查（React/Vue）：Rules of Hooks、依赖完整性、副作用清理、自定义 Hook 边界。Use when hooks check, useEffect, composition API, Hooks 规范。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code"
+  ],
+  "tags": [
+    "frontend",
+    "hooks",
+    "react",
+    "vue",
+    "effects"
+  ],
+  "focus": [
+    "rules-of-hooks",
+    "dependency-arrays",
+    "effect-cleanup",
+    "stale-closure",
+    "custom-hooks"
+  ],
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "目标文件、目录或代码片段"
+      },
+      "language": {
+        "type": "string",
+        "description": "可选：React / Vue / 其他"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "可选：额外约束（如只检查某组件）"
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "diff": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "diff",
+      "riskWarnings",
+      "manualChecks"
+    ]
+  }
+}
