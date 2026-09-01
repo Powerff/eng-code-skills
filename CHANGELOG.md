@@ -2,6 +2,11 @@
 
 All notable changes to **eng-code-skills** are documented here.
 
+## [0.2.4] — 2026-09-01
+
+### Added
+- Case study [greenfield-codebase-agent-kit](./examples/greenfield-codebase-agent-kit.md) — PRD `kit-prd-v1.0` → [codebase-agent-kit](https://github.com/Powerff/codebase-agent-kit) v0.1.0 walkthrough (Graph + Loop slices S0–S6).
+
 ## [0.2.3] — 2026-09-01
 
 ### Added

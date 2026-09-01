@@ -83,6 +83,17 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-code-standard
 
 见 [multi-llm.zh-CN.md](./multi-llm.zh-CN.md)（[English](./multi-llm.md)）与完整矩阵 [COMPATIBILITY.zh-CN.md](../COMPATIBILITY.zh-CN.md)。
 
+## 10) PRD → 0-1 落地案例（Graph + Loop）
+
+完整 walkthrough：[greenfield-codebase-agent-kit.zh-CN.md](./greenfield-codebase-agent-kit.zh-CN.md)
+
+```text
+@greenfield-graph-loop-commit
+需求：docs/kit-prd-v1.0.md
+目标：./codebase-agent-kit，MVP v0.1.0（8 个 plan-only Skill）。
+按 S0→S6 切片，每片 npm run validate，通过后 commit/push。
+```
+
 ## 各技能示例
 
 每个技能目录下提供双语示例 `skills/<name>/examples/`：

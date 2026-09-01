@@ -59,3 +59,4 @@ requirements.md
 | 新仓库从 PRD 开做 | `greenfield-graph-loop*` |
 | 改已有服务 | `backend-implement-verify*` |
 | 只出迁移/审计方案 | `codebase-agent-kit` |
+| **已落地案例（PRD→仓库）** | [examples/greenfield-codebase-agent-kit.zh-CN.md](./examples/greenfield-codebase-agent-kit.zh-CN.md) |

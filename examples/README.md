@@ -83,6 +83,17 @@ Use `backend-api-layer-check` for a fast DTO/VO/Entity boundary pass; use `backe
 
 See [multi-llm.md](./multi-llm.md) ([中文](./multi-llm.zh-CN.md)) and the full matrix in [COMPATIBILITY.md](../COMPATIBILITY.md).
 
+## 10) PRD → 0-1 case study (Graph + Loop)
+
+Full walkthrough: [greenfield-codebase-agent-kit.md](./greenfield-codebase-agent-kit.md)
+
+```text
+@greenfield-graph-loop-commit
+Requirements: docs/kit-prd-v1.0.md
+Target: ./codebase-agent-kit, MVP v0.1.0 (8 plan-only skills).
+Slices S0→S6, npm run validate after each, then commit/push.
+```
+
 ## Per-skill samples
 
 Each skill ships bilingual samples under `skills/<name>/examples/`:

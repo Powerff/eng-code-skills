@@ -6,7 +6,7 @@
 
 兼容 **主流编码大模型**（GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok 等）以及 [agentskills.io](https://agentskills.io)、Cursor、Claude Code、ChatGPT、GitHub Copilot、Continue、Cline、Windsurf、Trae 等宿主。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。详见 [COMPATIBILITY.zh-CN.md](./COMPATIBILITY.zh-CN.md)。
 
-**版本：** 0.2.3 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 29 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.zh-CN.md)
+**版本：** 0.2.4 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 29 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.zh-CN.md)
 
 ---
 

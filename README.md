@@ -6,7 +6,7 @@ Agent skill pack for engineering workflows: style checks, safe refactors, tech-d
 
 Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok, …) and hosts such as [agentskills.io](https://agentskills.io), Cursor, Claude Code, ChatGPT, GitHub Copilot, Continue, Cline, Windsurf, and Trae. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`). See [COMPATIBILITY.md](./COMPATIBILITY.md).
 
-**Version:** 0.2.3 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 29 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.md)
+**Version:** 0.2.4 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 29 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.md)
 
 ---
 

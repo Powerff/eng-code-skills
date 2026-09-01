@@ -59,3 +59,4 @@ After **S0**, always run `graphify update .` so later slices use Graph Engineeri
 | New project from PRD | `greenfield-graph-loop*` |
 | Change existing service | `backend-implement-verify*` |
 | Plan-only migration | `codebase-agent-kit` |
+| **Worked example (PRD → repo)** | [examples/greenfield-codebase-agent-kit.md](./examples/greenfield-codebase-agent-kit.md) |
