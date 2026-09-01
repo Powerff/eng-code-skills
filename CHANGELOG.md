@@ -2,6 +2,16 @@
 
 All notable changes to **eng-code-skills** are documented here.
 
+## [0.2.3] — 2026-09-01
+
+### Added
+- **Graph Engineering · Loop Engineering** — four skills for 0-1 delivery from requirements:
+  - `graph-engineering-requirements` — PRD → graphify plan, module map, MVP slices (plan-only)
+  - `loop-engineering-slice` — single slice Graph→Implement→Verify→Update→Stop
+  - `greenfield-graph-loop` — full 0-1 multi-slice MVP (no commit)
+  - `greenfield-graph-loop-commit` — same + commit/push + stop
+- [`docs/GRAPH-LOOP-ENGINEERING.md`](./GRAPH-LOOP-ENGINEERING.md) · [中文](./GRAPH-LOOP-ENGINEERING.zh-CN.md)
+
 ## [0.2.2] — 2026-08-27
 
 ### Added

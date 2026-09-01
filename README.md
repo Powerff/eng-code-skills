@@ -6,13 +6,13 @@ Agent skill pack for engineering workflows: style checks, safe refactors, tech-d
 
 Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok, …) and hosts such as [agentskills.io](https://agentskills.io), Cursor, Claude Code, ChatGPT, GitHub Copilot, Continue, Cline, Windsurf, and Trae. Each skill is a self-contained directory (`SKILL.md` + `skill.json` + `prompt.md` + bilingual `examples/`). See [COMPATIBILITY.md](./COMPATIBILITY.md).
 
-**Version:** 0.2.2 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 25 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md)
+**Version:** 0.2.3 · **License:** [MIT](./LICENSE) · **Node.js:** ≥ 18 · **Skills:** 29 · [Changelog](./CHANGELOG.md) · [Contributing](./CONTRIBUTING.md) · [Compatibility](./COMPATIBILITY.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.md)
 
 ---
 
 ## Quick navigation
 
-- [General](#general) · [Backend analysis](#backend-analysis) · [Backend workflows](#backend-workflows) · [Frontend](#frontend)
+- [General](#general) · [Backend analysis](#backend-analysis) · [Backend workflows](#backend-workflows) · [Greenfield Graph+Loop](#greenfield-graph--loop-engineering) · [Frontend](#frontend)
 - [When to use which](#when-to-use-which) · [Design constraints](#design-constraints) · [Installation](#installation) · [Layout](#skill-package-layout) · [Validate](#validate-locally)
 - [Compatibility](./COMPATIBILITY.md) ([中文](./COMPATIBILITY.zh-CN.md)) · [Examples](./examples/README.md) ([中文](./examples/README.zh-CN.md)) · [Multi-LLM](./examples/multi-llm.md)
 
@@ -20,7 +20,8 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | --- | --- |
 | [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [Backend analysis](#backend-analysis) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
-| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
+| [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
+| [Greenfield Graph+Loop](#greenfield-graph--loop-engineering) | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
 | [Frontend](#frontend) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -41,6 +42,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | Full delivery loop (graphify → verify → commit) | `backend-implement-verify-commit` | `backend-code-standards` |
 | Large service / frontend migration | `backend-project-refactor` / `frontend-project-refactor` | — |
 | JDK / runtime / toolchain upgrade (plan → code → verify) | `backend-stack-upgrade` | plan-only: `codebase-agent-kit` `codebase-migration-plan` |
+| **0-1 new project from PRD** | `greenfield-graph-loop-commit` | plan first: `graph-engineering-requirements`; one slice: `loop-engineering-slice` |
 
 ---
 
@@ -58,6 +60,7 @@ These skills produce findings, plans, and example Diffs. They only apply structu
 | Backend analysis | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
 | Frontend analysis | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | Standards / optimize | `backend-code-standards` · `backend-code-optimize` |
+| 0-1 graph orientation | `graph-engineering-requirements` |
 
 **How to use (Cursor):**
 
@@ -86,6 +89,9 @@ These skills are allowed to edit files / run commands as part of a phased loop. 
 | `backend-project-refactor` | Yes (after plan review) | Per phase / your request |
 | `frontend-project-refactor` | Yes (after plan review) | Per phase / your request |
 | `backend-stack-upgrade` | Yes (toolchain + needed code) | No (pair with commit skill) |
+| `loop-engineering-slice` | Yes (one slice Sx) | No |
+| `greenfield-graph-loop` | Yes (multi-slice MVP) | No |
+| `greenfield-graph-loop-commit` | Yes (multi-slice MVP) | Yes |
 
 **How to use — feature loop without commit:**
 
@@ -103,6 +109,13 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-stack-upgrade
 ```text
 @backend-stack-upgrade
 Upgrade this backend JDK 17 → 21. Keep API contracts. Do not commit.
+```
+
+**0-1 from PRD (with commit):**
+
+```text
+@greenfield-graph-loop-commit
+Requirements: docs/kit-prd-v1.0.md — Graph+Loop to MVP, then commit/push.
 ```
 
 ### C) Repo-wide plan only → use codebase-agent-kit
@@ -178,6 +191,17 @@ Packaged from Cursor technical skills used in day-to-day backend delivery. Cross
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | Verify → stop session services → restart for the user (no commit) |
 | [`backend-project-refactor`](./skills/backend-project-refactor/) | service-refactor methodology | Call-chain analysis → plan review → layered code → CR → test loop |
 | [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) | stack / JDK upgrade | graphify → upgrade plan → toolchain/code → verify → stop (no commit) |
+
+### Greenfield (Graph · Loop Engineering)
+
+0-1 from a requirements doc. See [GRAPH-LOOP-ENGINEERING.md](./GRAPH-LOOP-ENGINEERING.md).
+
+| Skill | Role |
+| --- | --- |
+| [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | **Graph Engineering** — PRD → query plan, module map, S0…Sn slices (plan-only) |
+| [`loop-engineering-slice`](./skills/loop-engineering-slice/) | **Loop Engineering** — one slice: orient → implement → verify → graphify update → stop |
+| [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) | Orchestrator: G → multi L → MVP acceptance → stop (no commit) |
+| [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) | Same + commit/push |
 
 ### Frontend
 

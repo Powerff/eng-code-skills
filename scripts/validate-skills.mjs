@@ -40,6 +40,11 @@ const EXPECTED = [
   'backend-implement-verify-restart',
   'backend-project-refactor',
   'backend-stack-upgrade',
+  // greenfield (graph + loop engineering)
+  'graph-engineering-requirements',
+  'loop-engineering-slice',
+  'greenfield-graph-loop',
+  'greenfield-graph-loop-commit',
   // frontend
   'frontend-code-style-check',
   'frontend-code-refactor',

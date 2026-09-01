@@ -1,0 +1,35 @@
+{
+  "name": "graph-engineering-requirements",
+  "displayName": "Graph Engineering — 需求图谱定向",
+  "version": "0.1.0",
+  "category": "greenfield-workflow",
+  "description": "Graph Engineering phase: decompose PRD/requirements into graphify query plan, module map, and MVP slice order. Plan-only. Use when graph engineering, PRD 图谱, 0-1 定向, @graph-engineering-requirements。",
+  "license": "MIT",
+  "compatibility": ["agentskills.io", "Cursor", "Claude Code", "ChatGPT", "GitHub Copilot", "Gemini", "Continue", "Cline", "Roo Code", "Windsurf", "Trae", "manual-prompt"],
+  "tags": ["graph-engineering", "graphify", "prd", "greenfield", "plan-only"],
+  "focus": ["requirements", "graphify", "module-map", "slice-plan"],
+  "kind": "plan-only",
+  "entrypoint": "SKILL.md",
+  "files": ["SKILL.md", "prompt.md", "skill.json", "examples/"],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "requirements": { "type": "string", "description": "PRD path, pasted doc, or feature description" },
+      "stack": { "type": "string", "description": "Optional: Java/Spring, Node, React, etc." },
+      "constraints": { "type": "string", "description": "Optional: timeline, must-not-change items" }
+    },
+    "required": ["requirements"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "slicePlan": { "type": "array" },
+      "riskWarnings": { "type": "array", "items": { "type": "string" } },
+      "manualChecks": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["summary", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": ["OpenAI GPT", "Anthropic Claude", "Google Gemini", "DeepSeek", "Qwen", "Moonshot Kimi", "xAI Grok", "other tool-using coding LLMs"],
+  "runtimeNotes": "Plan-only. Requires graphify CLI for brownfield; greenfield outputs post-S0 graphify checkpoints."
+}

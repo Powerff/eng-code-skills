@@ -1,0 +1,35 @@
+{
+  "name": "greenfield-graph-loop",
+  "displayName": "Greenfield Graph+Loop 0-1（不提交）",
+  "version": "0.1.0",
+  "category": "greenfield-workflow",
+  "description": "0-1 from requirements: Graph Engineering PRD map → multi-slice Loop Engineering → MVP acceptance → stop. No auto commit. Use when greenfield, 0-1, @greenfield-graph-loop。",
+  "license": "MIT",
+  "compatibility": ["agentskills.io", "Cursor", "Claude Code", "ChatGPT", "GitHub Copilot", "Gemini", "Continue", "Cline", "Roo Code", "Windsurf", "Trae", "manual-prompt"],
+  "tags": ["greenfield", "graph-engineering", "loop-engineering", "0-1", "mvp"],
+  "focus": ["requirements", "slices", "graphify", "mvp", "cleanup"],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "files": ["SKILL.md", "prompt.md", "skill.json", "examples/"],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "requirements": { "type": "string", "description": "PRD path or full requirements text" },
+      "stack": { "type": "string", "description": "Tech stack hints" },
+      "mvpScope": { "type": "string", "description": "Optional: explicit P0 boundary" }
+    },
+    "required": ["requirements"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "sliceStatus": { "type": "array" },
+      "riskWarnings": { "type": "array", "items": { "type": "string" } },
+      "manualChecks": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["summary", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": ["OpenAI GPT", "Anthropic Claude", "Google Gemini", "DeepSeek", "Qwen", "Moonshot Kimi", "xAI Grok", "other tool-using coding LLMs"],
+  "runtimeNotes": "Long-context tool-using model required. Multi-slice; may span sessions—report per-slice progress."
+}

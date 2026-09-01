@@ -1,0 +1,34 @@
+{
+  "name": "loop-engineering-slice",
+  "displayName": "Loop Engineering — 单切片闭环",
+  "version": "0.1.0",
+  "category": "greenfield-workflow",
+  "description": "Loop Engineering unit: graphify orient → implement one MVP slice → verify → graphify update → stop services. No auto commit. Use when loop engineering, MVP slice, @loop-engineering-slice。",
+  "license": "MIT",
+  "compatibility": ["agentskills.io", "Cursor", "Claude Code", "ChatGPT", "GitHub Copilot", "Gemini", "Continue", "Cline", "Roo Code", "Windsurf", "Trae", "manual-prompt"],
+  "tags": ["loop-engineering", "slice", "graphify", "implement", "verify", "greenfield"],
+  "focus": ["slice", "graphify", "implement", "verify", "cleanup"],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "files": ["SKILL.md", "prompt.md", "skill.json", "examples/"],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "slice": { "type": "string", "description": "Slice id e.g. S0, S1 and scope" },
+      "doneCriteria": { "type": "string", "description": "Verification definition of done" },
+      "requirements": { "type": "string", "description": "Optional PRD excerpt or path" }
+    },
+    "required": ["slice", "doneCriteria"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "riskWarnings": { "type": "array", "items": { "type": "string" } },
+      "manualChecks": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["summary", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": ["OpenAI GPT", "Anthropic Claude", "Google Gemini", "DeepSeek", "Qwen", "Moonshot Kimi", "xAI Grok", "other tool-using coding LLMs"],
+  "runtimeNotes": "Tool-using model recommended. One slice per invocation; chain slices via greenfield-graph-loop."
+}

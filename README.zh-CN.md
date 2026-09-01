@@ -6,13 +6,13 @@
 
 兼容 **主流编码大模型**（GPT / Claude / Gemini / DeepSeek / Qwen / Kimi / Grok 等）以及 [agentskills.io](https://agentskills.io)、Cursor、Claude Code、ChatGPT、GitHub Copilot、Continue、Cline、Windsurf、Trae 等宿主。每个技能为自包含目录（`SKILL.md` + `skill.json` + `prompt.md` + 双语 `examples/`）。详见 [COMPATIBILITY.zh-CN.md](./COMPATIBILITY.zh-CN.md)。
 
-**版本：** 0.2.2 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 25 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md)
+**版本：** 0.2.3 · **协议：** [MIT](./LICENSE) · **Node.js：** ≥ 18 · **技能数：** 29 · [变更日志](./CHANGELOG.md) · [贡献指南](./CONTRIBUTING.md) · [兼容性](./COMPATIBILITY.zh-CN.md) · [Graph+Loop 0-1](./GRAPH-LOOP-ENGINEERING.zh-CN.md)
 
 ---
 
 ## 快捷跳转
 
-- [通用](#通用) · [后端分析](#后端分析) · [后端工作流](#后端工作流) · [前端](#前端)
+- [通用](#通用) · [后端分析](#后端分析) · [后端工作流](#后端工作流) · [0-1 交付 Graph+Loop](#01-交付-graph--loop-engineering) · [前端](#前端)
 - [怎么选技能](#怎么选技能) · [设计约束](#设计约束) · [安装](#安装) · [目录结构](#单技能目录结构) · [本地校验](#本地校验)
 - [兼容性](./COMPATIBILITY.zh-CN.md)（[English](./COMPATIBILITY.md)） · [示例](./examples/README.zh-CN.md)（[English](./examples/README.md)） · [多模型](./examples/multi-llm.zh-CN.md)
 
@@ -20,7 +20,8 @@
 | --- | --- |
 | [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [后端分析](#后端分析) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
-| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · [`backend-code-optimize`](./skills/backend-code-optimize/) · [`backend-bug-fix`](./skills/backend-bug-fix/) · [`backend-code-commit`](./skills/backend-code-commit/) · [`backend-implement-verify`](./skills/backend-implement-verify/) · [`backend-implement-verify-commit`](./skills/backend-implement-verify-commit/) · [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) · [`backend-project-refactor`](./skills/backend-project-refactor/) · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
+| [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
+| [0-1 Graph+Loop](#01-交付-graph--loop-engineering) | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
 | [前端](#前端) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -41,6 +42,7 @@
 | 完整交付闭环 | `backend-implement-verify-commit` | `backend-code-standards` |
 | 大型服务 / 前端迁移 | `backend-project-refactor` / `frontend-project-refactor` | — |
 | JDK / 运行时 / 工具链升级（方案→改码→验证） | `backend-stack-upgrade` | 只出方案：`codebase-agent-kit` 的 `codebase-migration-plan` |
+| **从需求 0-1 做新项目（PRD→MVP）** | `greenfield-graph-loop-commit` | 先要纯方案：`graph-engineering-requirements`；单片：`loop-engineering-slice` |
 
 ---
 
@@ -58,6 +60,7 @@
 | 后端分析 | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
 | 前端分析 | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | 规范 / 优化 | `backend-code-standards` · `backend-code-optimize` |
+| 0-1 图谱定向 | `graph-engineering-requirements` |
 
 **Cursor 用法：**
 
@@ -86,6 +89,9 @@ npx agentskills load github:Powerff/eng-code-skills#skills/code-style-check
 | `backend-project-refactor` | 会（方案审查后） | 按阶段 / 你的要求 |
 | `frontend-project-refactor` | 会（方案审查后） | 按阶段 / 你的要求 |
 | `backend-stack-upgrade` | 会（工具链+必要代码） | 否（再接 commit Skill） |
+| `loop-engineering-slice` | 会（单切片 Sx） | 否 |
+| `greenfield-graph-loop` | 会（多切片 MVP） | 否 |
+| `greenfield-graph-loop-commit` | 会（多切片 MVP） | 是 |
 
 **功能开发（不提交）：**
 
@@ -103,6 +109,13 @@ npx agentskills load github:Powerff/eng-code-skills#skills/backend-stack-upgrade
 ```text
 @backend-stack-upgrade
 JDK 17 → 21。保持 API 契约。不要 commit。
+```
+
+**从 PRD 0-1 交付（含提交）：**
+
+```text
+@greenfield-graph-loop-commit
+需求：docs/kit-prd-v1.0.md，按 Graph+Loop 做到 MVP 后 commit/push。
 ```
 
 ### C) 全仓只出方案 → codebase-agent-kit
@@ -178,6 +191,17 @@ JDK 17 → 21。保持 API 契约。不要 commit。
 | [`backend-implement-verify-restart`](./skills/backend-implement-verify-restart/) | `implement-verify-restart` | 验证 → 停会话服务 → 为用户重启（不提交） |
 | [`backend-project-refactor`](./skills/backend-project-refactor/) | 服务重构方法论 | 调用链分析 → 方案审查 → 分层编码 → CR → 测试闭环 |
 | [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) | 技术栈 / JDK 升级 | 图谱 → 升级方案 → 工具链/代码 → 验证 → 停服（不自动提交） |
+
+### 0-1 交付（Graph · Loop Engineering）
+
+从**一份需求**把项目从 0 做到 MVP。方法论：[GRAPH-LOOP-ENGINEERING.zh-CN.md](./GRAPH-LOOP-ENGINEERING.zh-CN.md)
+
+| 技能 | 说明 |
+| --- | --- |
+| [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | **Graph Engineering** — PRD → 图谱 query 计划、模块图、S0…Sn 切片表（只出方案） |
+| [`loop-engineering-slice`](./skills/loop-engineering-slice/) | **Loop Engineering** — 单切片：定向 → 实现 → 验证 → graphify update → 停服 |
+| [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) | 编排器：G → 多片 L → MVP 验收 → 停服（不提交） |
+| [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) | 同上 + commit/push |
 
 ### 前端
 
