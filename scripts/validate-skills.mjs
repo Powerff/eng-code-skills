@@ -42,6 +42,7 @@ const EXPECTED = [
   'backend-stack-upgrade',
   // greenfield (graph + loop engineering)
   'graph-engineering-requirements',
+  'iteration-plan',
   'loop-engineering-slice',
   'greenfield-graph-loop',
   'greenfield-graph-loop-commit',

@@ -21,7 +21,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [Backend analysis](#backend-analysis) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
 | [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
-| [Greenfield Graph+Loop](#greenfield-graph--loop-engineering) | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
+| [Greenfield Graph+Loop](#greenfield-graph--loop-engineering) | [`iteration-plan`](./skills/iteration-plan/) · [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
 | [Frontend](#frontend) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -43,6 +43,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | Large service / frontend migration | `backend-project-refactor` / `frontend-project-refactor` | — |
 | JDK / runtime / toolchain upgrade (plan → code → verify) | `backend-stack-upgrade` | plan-only: `codebase-agent-kit` `codebase-migration-plan` |
 | **0-1 new project from PRD** | `greenfield-graph-loop-commit` | plan first: `graph-engineering-requirements`; one slice: `loop-engineering-slice` |
+| **Existing codebase — next iteration PRD** | `iteration-plan` | then `graph-engineering-requirements` → `greenfield-graph-loop*` |
 
 ---
 
@@ -61,6 +62,7 @@ These skills produce findings, plans, and example Diffs. They only apply structu
 | Frontend analysis | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | Standards / optimize | `backend-code-standards` · `backend-code-optimize` |
 | 0-1 graph orientation | `graph-engineering-requirements` |
+| Next iteration PRD (brownfield) | `iteration-plan` |
 
 **How to use (Cursor):**
 
@@ -198,6 +200,7 @@ Packaged from Cursor technical skills used in day-to-day backend delivery. Cross
 
 | Skill | Role |
 | --- | --- |
+| [`iteration-plan`](./skills/iteration-plan/) | **Iteration planning** — existing codebase → assess, plan next version, write PRD markdown (PRD file only) |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | **Graph Engineering** — PRD → query plan, module map, S0…Sn slices (plan-only) |
 | [`loop-engineering-slice`](./skills/loop-engineering-slice/) | **Loop Engineering** — one slice: orient → implement → verify → graphify update → stop |
 | [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) | Orchestrator: G → multi L → MVP acceptance → stop (no commit) |

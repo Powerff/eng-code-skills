@@ -1,0 +1,101 @@
+{
+  "name": "iteration-plan",
+  "displayName": "下一迭代需求规划（输出 PRD）",
+  "version": "1.0.0",
+  "category": "product",
+  "description": "Assess current project (any stack), gap analysis vs prior PRD/backlog, plan next iteration P0/P1/P2, write executable PRD markdown to docs/ or prd/. Plan-only for business code. Handoff to graph-engineering-requirements, greenfield-graph-loop, or SpecForge prd-to-code. Use when 需求规划, 下一迭代, iteration plan, brownfield 规划, @iteration-plan。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code",
+    "ChatGPT",
+    "OpenAI Codex",
+    "GitHub Copilot",
+    "Gemini",
+    "Continue",
+    "Cline",
+    "Roo Code",
+    "Windsurf",
+    "Trae",
+    "manual-prompt"
+  ],
+  "tags": [
+    "planning",
+    "prd",
+    "iteration",
+    "roadmap",
+    "brownfield",
+    "product"
+  ],
+  "focus": [
+    "current-state-assessment",
+    "gap-analysis",
+    "p0-prioritization",
+    "prd-authoring",
+    "handoff-to-implementation"
+  ],
+  "kind": "plan-only",
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "projectRoot": {
+        "type": "string",
+        "description": "Project root to assess, default current repo"
+      },
+      "baselinePrd": {
+        "type": "string",
+        "description": "Path to prior PRD or requirements doc"
+      },
+      "iterationVersion": {
+        "type": "string",
+        "description": "Target version label, e.g. V2.0"
+      },
+      "outputPrdPath": {
+        "type": "string",
+        "description": "Output PRD path, e.g. docs/foo-v2.0-prd.md"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "User priorities, deadline, must-have / must-not"
+      },
+      "focusAreas": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Optional focus areas for this iteration"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "prdPath": { "type": "string" },
+      "p0Items": { "type": "array", "items": { "type": "object" } },
+      "gapHighlights": { "type": "array", "items": { "type": "string" } },
+      "riskWarnings": { "type": "array", "items": { "type": "string" } },
+      "manualChecks": { "type": "array", "items": { "type": "string" } },
+      "nextStep": { "type": "string" }
+    },
+    "required": ["summary", "prdPath", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": [
+    "OpenAI GPT",
+    "Anthropic Claude",
+    "Google Gemini",
+    "DeepSeek",
+    "Qwen",
+    "Moonshot Kimi",
+    "xAI Grok",
+    "other tool-using coding LLMs"
+  ],
+  "runtimeNotes": "Read-heavy; Write PRD file only. Brownfield: graphify update recommended. Downstream: graph-engineering-requirements, greenfield-graph-loop, or SpecForge prd-to-code."
+}

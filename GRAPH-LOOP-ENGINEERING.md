@@ -10,6 +10,7 @@ Two complementary engines for **0-1 delivery from a requirements document**.
 
 | Skill | Role |
 | --- | --- |
+| [`iteration-plan`](./skills/iteration-plan/) | Existing codebase → assess state, plan **next iteration**, write PRD markdown (PRD file only) |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | PRD → decomposition, graphify query plan, module map, MVP slice table (plan-only) |
 
 Core moves: `graphify update` → `query` / `explain` / `path` / `affected` → written orientation deliverable.
@@ -32,14 +33,16 @@ Core moves: `graphify update` → `query` / `explain` / `path` / `affected` → 
 ## Typical flow
 
 ```
+Existing codebase — plan next version
+    → @iteration-plan                    (writes docs/*-prd.md)
+    → human PRD review
+    → @graph-engineering-requirements    (optional: graph orientation + slices)
+    → @greenfield-graph-loop-commit      (ship MVP)
+
+New repo from PRD
 requirements.md
     → @graph-engineering-requirements   (optional if you want plan-only first)
     → @greenfield-graph-loop-commit     (full 0-1)
-         Phase G: slice table S0…Sn
-         Phase L: each slice = mini loop
-         Phase A: P0 acceptance
-         Phase C: commit/push
-         Phase S: stop dev servers
 ```
 
 ## Slice conventions
@@ -56,6 +59,7 @@ After **S0**, always run `graphify update .` so later slices use Graph Engineeri
 
 | Scenario | Use |
 | --- | --- |
+| Existing codebase — plan next iteration PRD | `iteration-plan` |
 | New project from PRD | `greenfield-graph-loop*` |
 | Change existing service | `backend-implement-verify*` |
 | Plan-only migration | `codebase-agent-kit` |

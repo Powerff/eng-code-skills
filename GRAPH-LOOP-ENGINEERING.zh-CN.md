@@ -10,6 +10,7 @@
 
 | Skill | 作用 |
 | --- | --- |
+| [`iteration-plan`](./skills/iteration-plan/) | 已有代码库 → 盘点现状、规划**下一迭代**、输出 PRD markdown（只写 PRD） |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | PRD → 分解、graphify 查询计划、模块图、MVP 切片表（只出方案） |
 
 核心动作：`graphify update` → `query` / `explain` / `path` / `affected` → 书面定向结论。
@@ -32,14 +33,16 @@
 ## 推荐流程
 
 ```
+已有代码库，规划下一版
+    → @iteration-plan                    （输出 docs/*-prd.md）
+    → 人工审阅 PRD
+    → @graph-engineering-requirements    （可选：图谱定向 + 切片表）
+    → @greenfield-graph-loop-commit      （完整落地）
+
+新仓库从 PRD 0-1
 requirements.md
     → @graph-engineering-requirements   （可选：先要纯方案）
     → @greenfield-graph-loop-commit     （完整 0-1）
-         Phase G：切片表 S0…Sn
-         Phase L：每片一次小循环
-         Phase A：P0 验收
-         Phase C：提交推送
-         Phase S：停服
 ```
 
 ## 切片约定
@@ -56,6 +59,7 @@ requirements.md
 
 | 场景 | 选用 |
 | --- | --- |
+| 已有代码库，规划下一迭代 PRD | `iteration-plan` |
 | 新仓库从 PRD 开做 | `greenfield-graph-loop*` |
 | 改已有服务 | `backend-implement-verify*` |
 | 只出迁移/审计方案 | `codebase-agent-kit` |

@@ -21,7 +21,7 @@
 | [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
 | [后端分析](#后端分析) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
 | [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
-| [0-1 Graph+Loop](#01-交付-graph--loop-engineering) | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
+| [0-1 Graph+Loop](#01-交付-graph--loop-engineering) | [`iteration-plan`](./skills/iteration-plan/) · [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
 | [前端](#前端) | [`frontend-code-style-check`](./skills/frontend-code-style-check/) · [`frontend-code-refactor`](./skills/frontend-code-refactor/) · [`frontend-tech-debt-scan`](./skills/frontend-tech-debt-scan/) · [`frontend-code-review`](./skills/frontend-code-review/) · [`frontend-hooks-check`](./skills/frontend-hooks-check/) · [`frontend-component-audit`](./skills/frontend-component-audit/) · [`frontend-project-refactor`](./skills/frontend-project-refactor/) |
 
 ---
@@ -43,6 +43,7 @@
 | 大型服务 / 前端迁移 | `backend-project-refactor` / `frontend-project-refactor` | — |
 | JDK / 运行时 / 工具链升级（方案→改码→验证） | `backend-stack-upgrade` | 只出方案：`codebase-agent-kit` 的 `codebase-migration-plan` |
 | **从需求 0-1 做新项目（PRD→MVP）** | `greenfield-graph-loop-commit` | 先要纯方案：`graph-engineering-requirements`；单片：`loop-engineering-slice` |
+| **已有代码库，规划下一迭代 PRD** | `iteration-plan` | 审阅 PRD 后：`graph-engineering-requirements` → `greenfield-graph-loop*` |
 
 ---
 
@@ -61,6 +62,7 @@
 | 前端分析 | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | 规范 / 优化 | `backend-code-standards` · `backend-code-optimize` |
 | 0-1 图谱定向 | `graph-engineering-requirements` |
+| 下一迭代 PRD（brownfield） | `iteration-plan` |
 
 **Cursor 用法：**
 
@@ -198,6 +200,7 @@ JDK 17 → 21。保持 API 契约。不要 commit。
 
 | 技能 | 说明 |
 | --- | --- |
+| [`iteration-plan`](./skills/iteration-plan/) | **需求规划** — 已有代码库 → 盘点现状、规划下一迭代、输出 PRD markdown（只写 PRD） |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | **Graph Engineering** — PRD → 图谱 query 计划、模块图、S0…Sn 切片表（只出方案） |
 | [`loop-engineering-slice`](./skills/loop-engineering-slice/) | **Loop Engineering** — 单切片：定向 → 实现 → 验证 → graphify update → 停服 |
 | [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) | 编排器：G → 多片 L → MVP 验收 → 停服（不提交） |
