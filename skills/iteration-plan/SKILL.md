@@ -167,6 +167,7 @@ metadata:
 
 | 场景 | Skill |
 | --- | --- |
+| **规划→落地全自动串联** | `@plan-to-ship` |
 | PRD → 图谱定向与切片 | `@graph-engineering-requirements` |
 | PRD → 多切片 0-1 / 增量 MVP | `@greenfield-graph-loop` |
 | PRD → 全自动模块出码（SpecForge） | [SpecForge `@prd-to-code`](https://github.com/Powerff/SpecForge) |

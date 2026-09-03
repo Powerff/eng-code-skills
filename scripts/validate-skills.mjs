@@ -43,6 +43,7 @@ const EXPECTED = [
   // greenfield (graph + loop engineering)
   'graph-engineering-requirements',
   'iteration-plan',
+  'plan-to-ship',
   'loop-engineering-slice',
   'greenfield-graph-loop',
   'greenfield-graph-loop-commit',

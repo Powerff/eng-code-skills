@@ -1,0 +1,128 @@
+{
+  "name": "plan-to-ship",
+  "displayName": "Plan→Ship（规划落地全自动串联）",
+  "version": "1.1.0",
+  "category": "greenfield-workflow",
+  "description": "Fully automatic pipeline: iteration-plan writes PRD then immediately runs prd-to-code or greenfield-graph-loop. No human approval gate. Use when plan to ship, 规划并落地, 迭代串联, 自动出码, @plan-to-ship。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code",
+    "ChatGPT",
+    "OpenAI Codex",
+    "GitHub Copilot",
+    "Gemini",
+    "Continue",
+    "Cline",
+    "Roo Code",
+    "Windsurf",
+    "Trae",
+    "manual-prompt"
+  ],
+  "tags": [
+    "orchestration",
+    "iteration-plan",
+    "prd",
+    "auto-pipeline",
+    "greenfield",
+    "specforge",
+    "pipeline"
+  ],
+  "focus": [
+    "iteration-planning",
+    "auto-implement",
+    "implementer-routing",
+    "prd-to-code",
+    "greenfield-graph-loop"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "baselinePrd": {
+        "type": "string",
+        "description": "Prior PRD / requirements path"
+      },
+      "outputPrdPath": {
+        "type": "string",
+        "description": "Where to write the next-iteration PRD"
+      },
+      "iterationVersion": {
+        "type": "string",
+        "description": "e.g. V2.0"
+      },
+      "constraints": {
+        "type": "string",
+        "description": "Deadline, must-have / must-not"
+      },
+      "implementer": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "prd-to-code",
+          "greenfield-graph-loop",
+          "greenfield-graph-loop-commit"
+        ],
+        "description": "Landing path; default auto"
+      },
+      "outputRoot": {
+        "type": "string",
+        "description": "Output dir for prd-to-code"
+      },
+      "language": {
+        "type": "string",
+        "description": "Optional target language"
+      },
+      "skipPlan": {
+        "type": "boolean",
+        "description": "Skip Phase P and implement from existing PRD"
+      },
+      "prdPath": {
+        "type": "string",
+        "description": "PRD path when skipPlan is true"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "pipelineStatus": {
+        "type": "object",
+        "description": "P/I stage statuses"
+      },
+      "prdPath": { "type": "string" },
+      "implementerUsed": { "type": "string" },
+      "implementResult": { "type": "object" },
+      "riskWarnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["summary", "prdPath", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": [
+    "OpenAI GPT",
+    "Anthropic Claude",
+    "Google Gemini",
+    "DeepSeek",
+    "Qwen",
+    "Moonshot Kimi",
+    "xAI Grok",
+    "other tool-using coding LLMs"
+  ],
+  "runtimeNotes": "No human approval gate. Phase P inlines iteration-plan then Phase I runs immediately. Routes to SpecForge prd-to-code or greenfield-graph-loop*. Resume via skipPlan + prdPath."
+}

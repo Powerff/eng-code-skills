@@ -11,6 +11,7 @@
 | Skill | 作用 |
 | --- | --- |
 | [`iteration-plan`](./skills/iteration-plan/) | 已有代码库 → 盘点现状、规划**下一迭代**、输出 PRD markdown（只写 PRD） |
+| [`plan-to-ship`](./skills/plan-to-ship/) | **串联编排**：iteration-plan → 立即 prd-to-code / greenfield-graph-loop（无交互） |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | PRD → 分解、graphify 查询计划、模块图、MVP 切片表（只出方案） |
 
 核心动作：`graphify update` → `query` / `explain` / `path` / `affected` → 书面定向结论。
@@ -33,7 +34,12 @@
 ## 推荐流程
 
 ```
-已有代码库，规划下一版
+已有代码库，规划并落地（一键全自动）
+    → @plan-to-ship
+         Phase P：@iteration-plan（写 PRD）
+         Phase I：立即 @prd-to-code 或 @greenfield-graph-loop*（无交互）
+
+已有代码库，分步手工
     → @iteration-plan                    （输出 docs/*-prd.md）
     → 人工审阅 PRD
     → @graph-engineering-requirements    （可选：图谱定向 + 切片表）
@@ -60,6 +66,7 @@ requirements.md
 | 场景 | 选用 |
 | --- | --- |
 | 已有代码库，规划下一迭代 PRD | `iteration-plan` |
+| 已有代码库，规划→落地全自动串联 | `plan-to-ship` |
 | 新仓库从 PRD 开做 | `greenfield-graph-loop*` |
 | 改已有服务 | `backend-implement-verify*` |
 | 只出迁移/审计方案 | `codebase-agent-kit` |

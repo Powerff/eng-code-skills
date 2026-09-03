@@ -11,6 +11,7 @@ Two complementary engines for **0-1 delivery from a requirements document**.
 | Skill | Role |
 | --- | --- |
 | [`iteration-plan`](./skills/iteration-plan/) | Existing codebase → assess state, plan **next iteration**, write PRD markdown (PRD file only) |
+| [`plan-to-ship`](./skills/plan-to-ship/) | **Pipeline**: iteration-plan → immediately prd-to-code / greenfield-graph-loop (no human gate) |
 | [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) | PRD → decomposition, graphify query plan, module map, MVP slice table (plan-only) |
 
 Core moves: `graphify update` → `query` / `explain` / `path` / `affected` → written orientation deliverable.
@@ -33,7 +34,12 @@ Core moves: `graphify update` → `query` / `explain` / `path` / `affected` → 
 ## Typical flow
 
 ```
-Existing codebase — plan next version
+Existing codebase — plan and ship (fully automatic)
+    → @plan-to-ship
+         Phase P: @iteration-plan (write PRD)
+         Phase I: immediately @prd-to-code or @greenfield-graph-loop* (no pause)
+
+Existing codebase — manual steps
     → @iteration-plan                    (writes docs/*-prd.md)
     → human PRD review
     → @graph-engineering-requirements    (optional: graph orientation + slices)
@@ -60,6 +66,7 @@ After **S0**, always run `graphify update .` so later slices use Graph Engineeri
 | Scenario | Use |
 | --- | --- |
 | Existing codebase — plan next iteration PRD | `iteration-plan` |
+| Existing codebase — plan → ship (automatic) | `plan-to-ship` |
 | New project from PRD | `greenfield-graph-loop*` |
 | Change existing service | `backend-implement-verify*` |
 | Plan-only migration | `codebase-agent-kit` |
