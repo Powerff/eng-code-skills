@@ -18,7 +18,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 
 | Jump | Skills |
 | --- | --- |
-| [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
+| [General](#general) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) · [`doc-diagram`](./skills/doc-diagram/) |
 | [Backend analysis](#backend-analysis) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
 | [Backend workflows](#backend-workflows) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
 | [Greenfield Graph+Loop](#greenfield-graph--loop-engineering) | [`iteration-plan`](./skills/iteration-plan/) · [`plan-to-ship`](./skills/plan-to-ship/) · [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
@@ -45,6 +45,7 @@ Compatible with **mainstream coding LLMs** (GPT / Claude / Gemini / DeepSeek / Q
 | **0-1 new project from PRD** | `greenfield-graph-loop-commit` | plan first: `graph-engineering-requirements`; one slice: `loop-engineering-slice` |
 | **Existing codebase — next iteration PRD** | `iteration-plan` | then `graph-engineering-requirements` → `greenfield-graph-loop*` |
 | **Existing codebase — plan → ship (automatic)** | `plan-to-ship` | routes to SpecForge `prd-to-code` or `greenfield-graph-loop*` |
+| **Docs missing architecture / flow diagrams** | `doc-diagram` | writes Mermaid into markdown; `preview` for chat-only |
 
 ---
 
@@ -58,7 +59,7 @@ These skills produce findings, plans, and example Diffs. They only apply structu
 
 | Kind | Skills |
 | --- | --- |
-| General | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` |
+| General | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` · `doc-diagram` |
 | Backend analysis | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
 | Frontend analysis | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | Standards / optimize | `backend-code-standards` · `backend-code-optimize` |
@@ -167,6 +168,7 @@ Domain focus:
 | [`code-refactor`](./skills/code-refactor/) | Structure-preserving refactoring |
 | [`tech-debt-scan`](./skills/tech-debt-scan/) | Project-level technical debt inventory |
 | [`code-review`](./skills/code-review/) | General-purpose code review |
+| [`doc-diagram`](./skills/doc-diagram/) | Add Mermaid architecture + flow diagrams into docs from document content |
 
 ### Backend analysis
 

@@ -24,6 +24,7 @@ const EXPECTED = [
   'code-refactor',
   'tech-debt-scan',
   'code-review',
+  'doc-diagram',
   // backend analysis
   'backend-code-style-check',
   'backend-code-refactor',

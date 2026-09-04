@@ -1,0 +1,107 @@
+{
+  "name": "doc-diagram",
+  "displayName": "文档架构图与流程图",
+  "version": "1.0.0",
+  "category": "documentation",
+  "description": "Read PRD/design/README docs, infer layers and flows, write Mermaid architecture diagrams and flowcharts into the markdown. Use when 架构图, 流程图, Mermaid, 文档配图, architecture diagram, flowchart, @doc-diagram。",
+  "license": "MIT",
+  "compatibility": [
+    "agentskills.io",
+    "Cursor",
+    "Claude Code",
+    "ChatGPT",
+    "OpenAI Codex",
+    "GitHub Copilot",
+    "Gemini",
+    "Continue",
+    "Cline",
+    "Roo Code",
+    "Windsurf",
+    "Trae",
+    "manual-prompt"
+  ],
+  "tags": [
+    "documentation",
+    "mermaid",
+    "architecture",
+    "flowchart",
+    "diagram",
+    "visualization"
+  ],
+  "focus": [
+    "architecture-diagram",
+    "flowchart",
+    "mermaid",
+    "doc-enrichment"
+  ],
+  "kind": "workflow",
+  "entrypoint": "SKILL.md",
+  "files": [
+    "SKILL.md",
+    "prompt.md",
+    "skill.json",
+    "examples/"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "docPath": {
+        "type": "string",
+        "description": "Target markdown doc path (or multiple paths)"
+      },
+      "mode": {
+        "type": "string",
+        "enum": ["write", "preview"],
+        "description": "write inserts into docs; preview only prints Mermaid"
+      },
+      "diagramTypes": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "e.g. architecture, flowchart, sequence, state"
+      },
+      "alignCode": {
+        "type": "boolean",
+        "description": "Use graphify/code to calibrate diagrams"
+      },
+      "sectionTitle": {
+        "type": "string",
+        "description": "Heading for inserted section"
+      }
+    },
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "summary": { "type": "string" },
+      "docsUpdated": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "diagrams": {
+        "type": "array",
+        "items": { "type": "object" }
+      },
+      "riskWarnings": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "manualChecks": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "required": ["summary", "riskWarnings", "manualChecks"]
+  },
+  "modelFamilies": [
+    "OpenAI GPT",
+    "Anthropic Claude",
+    "Google Gemini",
+    "DeepSeek",
+    "Qwen",
+    "Moonshot Kimi",
+    "xAI Grok",
+    "other tool-using coding LLMs"
+  ],
+  "runtimeNotes": "Writes Mermaid into markdown by default. Does not modify business source. Optional graphify align. preview mode is chat-only."
+}

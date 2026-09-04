@@ -18,7 +18,7 @@
 
 | 跳转 | 技能 |
 | --- | --- |
-| [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) |
+| [通用](#通用) | [`code-style-check`](./skills/code-style-check/) · [`code-refactor`](./skills/code-refactor/) · [`tech-debt-scan`](./skills/tech-debt-scan/) · [`code-review`](./skills/code-review/) · [`doc-diagram`](./skills/doc-diagram/) |
 | [后端分析](#后端分析) | [`backend-code-style-check`](./skills/backend-code-style-check/) · [`backend-code-refactor`](./skills/backend-code-refactor/) · [`backend-tech-debt-scan`](./skills/backend-tech-debt-scan/) · [`backend-code-review`](./skills/backend-code-review/) · [`backend-api-layer-check`](./skills/backend-api-layer-check/) |
 | [后端工作流](#后端工作流) | [`backend-code-standards`](./skills/backend-code-standards/) · … · [`backend-stack-upgrade`](./skills/backend-stack-upgrade/) |
 | [0-1 Graph+Loop](#01-交付-graph--loop-engineering) | [`iteration-plan`](./skills/iteration-plan/) · [`plan-to-ship`](./skills/plan-to-ship/) · [`graph-engineering-requirements`](./skills/graph-engineering-requirements/) · [`loop-engineering-slice`](./skills/loop-engineering-slice/) · [`greenfield-graph-loop`](./skills/greenfield-graph-loop/) · [`greenfield-graph-loop-commit`](./skills/greenfield-graph-loop-commit/) |
@@ -45,6 +45,7 @@
 | **从需求 0-1 做新项目（PRD→MVP）** | `greenfield-graph-loop-commit` | 先要纯方案：`graph-engineering-requirements`；单片：`loop-engineering-slice` |
 | **已有代码库，规划下一迭代 PRD** | `iteration-plan` | 审阅 PRD 后：`graph-engineering-requirements` → `greenfield-graph-loop*` |
 | **已有代码库，规划→落地全自动串联** | `plan-to-ship` | 自动路由 SpecForge `prd-to-code` 或 `greenfield-graph-loop*` |
+| **文档缺架构图 / 流程图** | `doc-diagram` | 写入 Mermaid；`preview` 仅对话输出 |
 
 ---
 
@@ -58,7 +59,7 @@
 
 | 类型 | Skills |
 | --- | --- |
-| 通用 | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` |
+| 通用 | `code-style-check` · `code-refactor` · `tech-debt-scan` · `code-review` · `doc-diagram` |
 | 后端分析 | `backend-code-style-check` · `backend-code-refactor` · `backend-tech-debt-scan` · `backend-code-review` · `backend-api-layer-check` |
 | 前端分析 | `frontend-code-style-check` · `frontend-code-refactor` · `frontend-tech-debt-scan` · `frontend-code-review` · `frontend-hooks-check` · `frontend-component-audit` |
 | 规范 / 优化 | `backend-code-standards` · `backend-code-optimize` |
@@ -167,6 +168,7 @@ JDK 17 → 21。保持 API 契约。不要 commit。
 | [`code-refactor`](./skills/code-refactor/) | 结构保持型安全重构 |
 | [`tech-debt-scan`](./skills/tech-debt-scan/) | 项目级技术债务盘点 |
 | [`code-review`](./skills/code-review/) | 通用代码评审 |
+| [`doc-diagram`](./skills/doc-diagram/) | 根据文档内容补充 Mermaid 架构图与流程图 |
 
 ### 后端分析
 
